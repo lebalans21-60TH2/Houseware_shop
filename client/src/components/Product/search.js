@@ -8,9 +8,9 @@ class SearchResults extends Component {
   addToCart = id => {
     if (this.props.user.userData.isAuth) {
       this.props.dispatch(addToCart(id));
-      message.success("The Item Added To Cart!");
+      message.success("Sản phẩm đã được thêm vào giỏ hàng!");
     } else {
-      message.error("You Must Be Login");
+      message.error("Ban phải đăng nhập trước!");
     }
   };
   showProducts = () => {
@@ -18,7 +18,7 @@ class SearchResults extends Component {
     if (products.resultsProduct) {
       if (products.resultsProduct.success) {
         let resultProduct = products.resultsProduct.product.map((item, i) => (
-          <div className="col-md-3 new-collections-grid" key={i}>
+          <div className="col-md-3 new-collections-grid" style={{border:"1px solid #535", borderRadius:"10px", padding:"3px"}} key={i}>
             <div className="new-collections-grid1 animated wow slideInUp">
               <div className="new-collections-grid1-image">
                 <a href="single.html" className="product-image">
@@ -29,12 +29,13 @@ class SearchResults extends Component {
                         : "images/change7.jpg"
                     }
                     alt=" "
-                    width={180}
+                    width={250}
                     height={180}
+                    style={{objectFit:"cover"}}
                   />
                 </a>
                 <div className="new-collections-grid1-image-pos">
-                  <Link to={`/product_detail/$${item._id}`}>Quick View</Link>
+                  <Link to={`/product_detail/$${item._id}`}>Xem chi tiết</Link>
                 </div>
                 <div class="new-collections-grid1-right">
                   <div class="rating">
@@ -66,12 +67,12 @@ class SearchResults extends Component {
               <p>{item.description.slice(0, 85)}...</p>
               <div className="new-collections-grid1-left simpleCart_shelfItem">
                 <p>
-                  <span className="item_price">${item.price}</span>
+                  <span className="item_price">{item.price}đ</span>
                   <a
                     className="item_add"
                     onClick={() => this.addToCart(item._id)}
                   >
-                    Add To Cart{" "}
+                    Thêm vào giỏ{" "}
                   </a>
                 </p>
               </div>
@@ -80,7 +81,7 @@ class SearchResults extends Component {
         ));
         return resultProduct;
       } else {
-        return <div>No Product To Found</div>;
+        return <div><h2 style={{textAlign:"center", fontWeight:"600"}}>Không tìm thấy sản phẩm</h2></div>;
       }
     }
   };
@@ -99,16 +100,16 @@ class SearchResults extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </Link>
               </li>
-              <li className="active">Search</li>
+              <li className="active">Tìm kiếm</li>
             </ol>
           </div>
         </div>
         <div className="new-collections">
           <div className="container">
-            <h3 className="animated wow zoomIn">Search Results</h3>
+            <h3 className="animated wow zoomIn">Kết quả tìm kiếm</h3>
             <div className="new-collections-grids">
               {this.showProducts() ? (
                 this.showProducts()

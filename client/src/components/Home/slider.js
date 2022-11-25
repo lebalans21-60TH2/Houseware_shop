@@ -10,11 +10,16 @@ const Slider = props => {
               className="banner-info animated wow zoomIn"
               data-wow-delay=".5s"
             >
-              <h3>Free Online Shopping</h3>
+             
+                  <div className="banner-bottom-grid-left1-pos1" style={{borderRadius:"30px", backgroundColor:"rgb(86 85 86 / 63%)"}}>
+                  <h3 style={{color:"rgb(255 255 255)", fontWeight:"600"}}>Houseware Store</h3>
+                    </div>
+                  
+              
               <h4>
-                Up to{" "}
+                Khuyến mãi lên đến{" "}
                 <span>
-                  50% <i>Off/-</i>
+                  30%<i></i>
                 </span>
               </h4>
               <div className="wmuSlider example1">
@@ -61,13 +66,13 @@ const Slider = props => {
               className="banner-info animated wow zoomIn"
               data-wow-delay=".5s"
             >
-              <h3>Yamaha Motor GP</h3>
-              <h4>
+              <h3></h3>
+              {/* <h4>
                 Up to{" "}
                 <span>
                   30% <i>Off/-</i>
                 </span>
-              </h4>
+              </h4> */}
               <div className="wmuSlider example1">
                 <div className="wmuSliderWrapper">
                   <article
@@ -112,13 +117,13 @@ const Slider = props => {
               className="banner-info animated wow zoomIn"
               data-wow-delay=".5s"
             >
-              <h3>Motor GP Version 2019</h3>
-              <h4>
+              <h3></h3>
+              {/* <h4>
                 Up to{" "}
                 <span>
                   10%% <i>Off/-</i>
                 </span>
-              </h4>
+              </h4> */}
               <div className="wmuSlider example1">
                 <div className="wmuSliderWrapper">
                   <article
@@ -163,13 +168,13 @@ const Slider = props => {
               className="banner-info animated wow zoomIn"
               data-wow-delay=".5s"
             >
-              <h3>BMW S1000RR Racing</h3>
-              <h4>
+              <h3></h3>
+              {/* <h4>
                 Up to{" "}
                 <span>
                   20% <i>Off/-</i>
                 </span>
-              </h4>
+              </h4> */}
               <div className="wmuSlider example1">
                 <div className="wmuSliderWrapper">
                   <article

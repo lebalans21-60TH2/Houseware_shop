@@ -326,7 +326,7 @@ a.simpleCart_empty {
 /*-- //header --*/
 /*-- banner --*/
 .banner{
-	background:url(../images/banner3.jpg) no-repeat 0px 0px;
+	background:url(../images/bgsp12.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -335,7 +335,7 @@ a.simpleCart_empty {
 	min-height:700px;
 }
 .banner1{
-	background:url(../images/banner1.jpg) no-repeat 0px 0px;
+	background:url(../images/slider_2.webp) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -344,7 +344,7 @@ a.simpleCart_empty {
 	min-height:700px;
 }
 .banner4{
-	background:url(../images/banner4.jpg) no-repeat 0px 0px;
+	background:url(../images/slider_3.webp) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -353,7 +353,7 @@ a.simpleCart_empty {
 	min-height:700px;
 }
 .banner2{
-	background:url(../images/BMW_S1000RR_race.jpg) no-repeat 0px 0px;
+	background:url(../images/home-smeg.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -848,7 +848,8 @@ p.est{
 	display:block;
 }
 .new-collections-grid1-image-pos a:hover{
-	background:#ffc229;
+	background:#446e69;
+	color:#fff;
 }
 .new-collections-grid1-image-pos1 {
     left: 41% !important;
@@ -1826,15 +1827,23 @@ ul.wmuSliderPagination {
 .description{
 	margin:2em 0;
 }
+.description i{
+	font-size:17px;
+	color:rgb(0, 0, 0);
+	line-height:1.8em;
+	margin:0.5em 0 0;
+	font-weight: bold;
+}
 .description h5{
 	color:#212121;
 	font-size:1em;
 	margin:0;
+	font-weight: bold;
 }
 .description p{
-	font-size:14px;
-	color:#999;
-	line-height:1.8em;
+	font-size:15px;
+	color:rgb(54, 54, 54);
+	line-height:1.9em;
 	margin:0.5em 0 0;
 }
 .color-quality-left{

@@ -11,6 +11,7 @@ import { getProductDetail, clearProductDetail } from "../../actions/products";
 import RelatedProducts from "./relatedProducts";
 import { message, Spin } from "antd";
 import { FacebookProvider, Comments, Like } from "react-facebook";
+import currency from "currency-formatter";
 import "../../newCss/css/styles1.css";
 class ProductPage extends Component {
   state = {
@@ -35,9 +36,9 @@ class ProductPage extends Component {
     const { user } = this.props;
     if (user.userData.isAuth) {
       this.props.dispatch(addToCart(id, this.state));
-      message.success("The Item Added To Cart!");
+      message.success("Sản phẩm đã thêm vào giỏ hàng!");
     } else {
-      message.error("You Must Be Login");
+      message.error("Bạn phải đăng nhập trước!");
     }
   };
   addToCartHandler = id => {
@@ -53,7 +54,7 @@ class ProductPage extends Component {
           ) {
             this.addToCart0(id);
           } else {
-            message.success("Quantity isn't enough!");
+            message.success("Số lượng sản phẩm không đủ!");
           }
         }
       });
@@ -87,14 +88,14 @@ class ProductPage extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Product Detail</li>
+              <li className="active">Chi tiết sản phẩm</li>
             </ol>
           </div>
         </div>
-        <div className="container">
+        <div className="container" style={{marginTop:"1.5vmax"}}>
           {productDetail ? (
             <div className="col-md-12 single-right">
               <div
@@ -111,16 +112,11 @@ class ProductPage extends Component {
                 className="col-md-7 single-right-left simpleCart_shelfItem animated wow slideInRight"
                 data-wow-delay=".5s"
               >
-                <h3>{productDetail ? productDetail.name : ""}</h3>
+                <h3 style={{fontWeight:"bold"}}>{productDetail ? productDetail.name : ""}</h3>
                 <h4>
                   <span className="item_price">
                     {productDetail ? (
-                      <NumberFormat
-                        value={productDetail.price}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
+                      <span style={{fontWeight:"550", fontSize:"1.3em"}}>{`${currency.format(productDetail.price, {code:"VND"})}`}</span>
                     ) : (
                       ""
                     )}
@@ -135,15 +131,15 @@ class ProductPage extends Component {
                     <label>1</label>
                   </span>
                 </div>
-                <div className="description">
+                {/* <div className="description">
                   <h5>
-                    <i>Description</i>
+                    <i>Mô tả:</i>
                   </h5>
                   <p>{productDetail ? productDetail.description : ""}</p>
-                </div>
+                </div> */}
                 <div className="color-quality">
                   <div className="color-quality-left">
-                    <h5>Quality :</h5>
+                    <h5 style={{fontWeight:"bold"}}>Số lượng :</h5>
                     <select
                       id="country1"
                       onChange={this.onChange}
@@ -153,23 +149,27 @@ class ProductPage extends Component {
                       <option value={2}>2 </option>
                       <option value={3}>3 </option>
                       <option value={4}>4 </option>
+                      <option value={5}>5 </option>
                     </select>
                   </div>
                   <div className="clearfix"> </div>
                 </div>
                 <div className="occasional">
                   <div className="product_tags">
+                  <h5 style={{fontWeight:"bold"}}>Giao hàng:</h5>
                     {productDetail.shipping ? (
                       <div className="tag">
                         <div>
                           <FontAwesomeIcon icon={faTruck} />
                         </div>
                         <div className="tag_text">
-                          <div>Free shipping</div>
-                          <div>And return</div>
+                          <div>Miễn phí giao hàng</div>
+                          {/* <div>And return</div> */}
                         </div>
                       </div>
                     ) : null}
+                    {" "}
+                     <h5 style={{fontWeight:"bold", marginTop:"9px"}}>Trạng thái:</h5>
                     {productDetail.available ? (
                       <div className="tag">
                         <div>
@@ -177,8 +177,8 @@ class ProductPage extends Component {
                         </div>
 
                         <div className="tag_text">
-                          <div>Available</div>
-                          <div>in store</div>
+                          <div>Còn hàng</div>
+                          {/* <div>in store</div> */}
                         </div>
                       </div>
                     ) : (
@@ -187,8 +187,8 @@ class ProductPage extends Component {
                           <FontAwesomeIcon icon={faTimes} />
                         </div>
                         <div className="tag_text">
-                          <div>Not Available</div>
-                          <div>Preorder only</div>
+                          <div>Hết hàng</div>
+                          {/* <div>Preorder only</div> */}
                         </div>
                       </div>
                     )}
@@ -204,12 +204,12 @@ class ProductPage extends Component {
                       );
                     }}
                   >
-                    add to cart{" "}
+                    Thêm vào giỏ{" "}
                   </a>
                 </div>
                 <div className="social">
                   <div className="social-left">
-                    <p>Share On :</p>
+                    <p>Chia sẻ:</p>
                   </div>
                   <div className="social-right">
                     <ul className="social-icons">
@@ -250,7 +250,7 @@ class ProductPage extends Component {
                         aria-controls="home"
                         aria-expanded="true"
                       >
-                        Description
+                        Mô tả
                       </a>
                     </li>
                     <li role="presentation">
@@ -261,7 +261,7 @@ class ProductPage extends Component {
                         data-toggle="tab"
                         aria-controls="profile"
                       >
-                        Reviews(2)
+                        Đánh giá
                       </a>
                     </li>
                   </ul>
@@ -272,7 +272,7 @@ class ProductPage extends Component {
                       id="home"
                       aria-labelledby="home-tab"
                     >
-                      <h5>Product Brief Description</h5>
+                      <h5>Mô tả tóm tắt:</h5>
                       <p>{productDetail ? productDetail.description : ""}</p>
                     </div>
                     <div

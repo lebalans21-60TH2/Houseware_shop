@@ -71,7 +71,7 @@ class ProdImg extends Component {
             <div className="product_image_container">
                 <div className="main_pic">
                     <div
-                        style={{background:`url(${this.renderCardImage(detail.images)}) no-repeat`}} 
+                        style={{background:`url(${this.renderCardImage(detail.images)}) no-repeat`, border:"1px solid #444", borderRadius:"8px"}} 
                         onClick={()=> this.handleLightBox(0)}
                     >
                     </div>

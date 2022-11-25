@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const links = [
   {
-    name: "My account",
+    name: "Tôi",
     linkTo: "/user/dashboard"
   },
   {
-    name: "User information",
+    name: "Thông tin",
     linkTo: "/user/updateProfile"
   },
   {
-    name: "My Cart",
+    name: "Giỏ hàng",
     linkTo: "/cart"
   }
 ];
@@ -32,7 +32,7 @@ class UserLayout extends React.Component {
       <div className="container">
         <div className="user_container">
           <div className="user_left_nav">
-            <h2>My Account</h2>
+            <h2>Tài khoản</h2>
             <div className="links">{generateLinks(links)}</div>
           </div>
           <div className="user_right">{this.props.children}</div>

@@ -39,12 +39,11 @@ class Footer extends Component {
                             className="col-md-3 footer-grid animated wow slideInLeft"
                             data-wow-delay=".5s"
                         >
-                            <h3>About Us</h3>
+                            <h3>Giới thiệu</h3>
                             <p>
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                                Houseware Store chuyên cung cấp các sản phẩm đồ gia dụng giá rẻ, chất lượng cao.
                                 <span>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit.
+                 Nhiều chính sách khuyến mãi, 1 đổi 1 trong vòng 7 ngày và bảo hành trọn đời cho mọi sản phẩm.
                 </span>
                             </p>
                         </div>
@@ -52,15 +51,15 @@ class Footer extends Component {
                             className="col-md-3 footer-grid animated wow slideInLeft"
                             data-wow-delay=".6s"
                         >
-                            <h3>Contact Info</h3>
+                            <h3>Thông tin liên hệ</h3>
                             <ul>
                                 <li>
                                     <i
                                         className="glyphicon glyphicon-map-marker"
                                         aria-hidden="true"
                                     />
-                                    55/31/1 Thanh My, Ward 8, Tan Binh District,{" "}
-                                    <span>Ho Chi Minh City.</span>
+                                    55/31/1 Thanh My, Ward 8, Tan Binh District, TP.HCM.
+                                    
                                 </li>
                                 <li>
                                     <i
@@ -68,7 +67,7 @@ class Footer extends Component {
                                         aria-hidden="true"
                                     />
                                     <a href="mailto:taihtgcs15415@fpt.edu.vn">
-                                      Longnguyen9897@gmail.com
+                                      admin123@gmail.com
                                     </a>
                                 </li>
                                 <li>
@@ -76,11 +75,11 @@ class Footer extends Component {
                                         className="glyphicon glyphicon-earphone"
                                         aria-hidden="true"
                                     />
-                                    +(84) 961 079 699
+                                    +(84) 233 234 564
                                 </li>
                             </ul>
                         </div>
-                        <div
+                        {/* <div
                             className="col-md-3 footer-grid animated wow slideInLeft"
                             data-wow-delay=".7s"
                         >
@@ -194,48 +193,58 @@ class Footer extends Component {
                                 </a>
                             </div>
                             <div className="clearfix"></div>
+                        </div> */}
+                           <div
+                            className="col-md-3 footer-grid animated wow slideInLeft"
+                            data-wow-delay=".6s"
+                        >
+                            <h3>Hướng dẫn - chính sách</h3>
+                            <ul>
+                                <li>
+                                   Hướng dẫn mua hàng
+                                </li>
+                                <li>
+                                   Chính sách đổi trả
+                                </li>
+                                <li>
+                                   Chính sách bảo hành
+                                </li>
+                                <li>
+                                   Chính sách thanh toán
+                                </li>
+                            </ul>
                         </div>
                         <div
                             className="col-md-3 footer-grid animated wow slideInLeft"
                             data-wow-delay=".8s"
                         >
-                            <h3>Blog Posts</h3>
-                            <div className="footer-grid-sub-grids">
-                                <div className="footer-grid-sub-grid-left">
-                                    <a href="single.html">
-                                        <img
-                                            src="/images/recent8-8.jpg"
-                                            alt=" "
-                                            className="img-responsive"
-                                        />
-                                    </a>
-                                </div>
-                                <div className="footer-grid-sub-grid-right">
-                                    <h4>
-                                        <a href="single.html">culpa qui officia deserunt</a>
-                                    </h4>
-                                    <p>Posted On 22/02/2020</p>
-                                </div>
-                                <div className="clearfix"></div>
-                            </div>
-                            <div className="footer-grid-sub-grids">
-                                <div className="footer-grid-sub-grid-left">
-                                    <a href="single.html">
-                                        <img
-                                            src="/images/recent1-1.jpg"
-                                            alt=" "
-                                            className="img-responsive"
-                                        />
-                                    </a>
-                                </div>
-                                <div className="footer-grid-sub-grid-right">
-                                    <h4>
-                                        <a href="single.html">Quis autem vel eum iure</a>
-                                    </h4>
-                                    <p>Posted On 30/3/2020</p>
-                                </div>
-                                <div className="clearfix"></div>
-                            </div>
+                            <h3>Theo dõi chúng tôi</h3>
+                            <ul className="social-icons" >
+                                <li>
+                                    <img 
+                                    style={{width:"40px", height:"40px"}}
+                                    src="images/fackebook.png" 
+                                    alt="facebook"/>
+                                </li>
+                                <li>
+                                    <img 
+                                    style={{width:"40px", height:"40px"}}
+                                    src="images/Twitter-logo.png" 
+                                    alt="twiter"/>
+                                </li>
+                                <li>
+                                    <img 
+                                    style={{width:"40px", height:"40px"}}
+                                    src="images/pngwing.com.png" 
+                                    alt="google"/>
+                                </li>
+                                <li>
+                                    <img 
+                                    style={{width:"40px", height:"40px"}}
+                                    src="images/intagram.png" 
+                                    alt="intagram"/>
+                                </li>
+                            </ul>
                         </div>
                         <div className="clearfix"></div>
                     </div>
@@ -245,7 +254,7 @@ class Footer extends Component {
                     >
                         <h2>
                             <a href="index.html">
-                                Motor Store <span>shop anywhere</span>
+                                HouseWare Store<span>shop anywhere</span>
                             </a>
                         </h2>
                     </div>
@@ -253,10 +262,10 @@ class Footer extends Component {
                         className="copy-right animated wow slideInUp"
                         data-wow-delay=".5s"
                     >
-                        <p>
+                        {/* <p>
                             &copy 2016 Motor Store. All rights reserved | Design by{" "}
                             <a href="https://www.facebook.com/tai.nganh.9">Nguyen Hoang Long</a>
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </div>

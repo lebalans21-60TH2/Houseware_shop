@@ -12,13 +12,13 @@ class Register extends Component {
         formError: false,
         formSuccess: "",
         formdata: {
-            name: {
+            lastname: {
                 element: "input",
                 value: "",
                 config: {
-                    name: "name_input",
+                    name: "lastname_input",
                     type: "text",
-                    placeholder: "First Name..."
+                    placeholder: "Họ..." 
                 },
                 validation: {
                     required: true
@@ -27,13 +27,13 @@ class Register extends Component {
                 touched: false,
                 validationMessage: ""
             },
-            lastname: {
+            name: {
                 element: "input",
                 value: "",
                 config: {
-                    name: "lastname_input",
+                    name: "name_input",
                     type: "text",
-                    placeholder: "Last Name..."
+                    placeholder: "Tên..."
                 },
                 validation: {
                     required: true
@@ -48,7 +48,7 @@ class Register extends Component {
                 config: {
                     name: "email_input",
                     type: "email",
-                    placeholder: "Enter your email"
+                    placeholder: "Email của bạn!!!"
                 },
                 validation: {
                     required: true,
@@ -64,7 +64,7 @@ class Register extends Component {
                 config: {
                     name: "password_input",
                     type: "password",
-                    placeholder: "Enter your password"
+                    placeholder: "Vui lòng nhập mật khẩu!!!"
                 },
                 validation: {
                     required: true
@@ -79,7 +79,7 @@ class Register extends Component {
                 config: {
                     name: "confirm_password_input",
                     type: "password",
-                    placeholder: "Confirm your password"
+                    placeholder: "Vui lòng nhập lại mật khẩu!!!"
                 },
                 validation: {
                     required: true,
@@ -103,12 +103,12 @@ class Register extends Component {
         let secondsToGo = 3;
         const modal = Modal.success({
             title: "SUCCESSFULLY !!",
-            content: `You will be redirected to the LOGIN after ${secondsToGo} second!`
+            content: `Trang Đăng Nhập sẽ mở sau ${secondsToGo} giây!`
         });
         const timer = setInterval(() => {
             secondsToGo -= 1;
             modal.update({
-                content: `You will be redirected to the LOGIN after ${secondsToGo} second!`
+                content: `Trang Đăng Nhập sẽ mở sau ${secondsToGo} giây!`
             });
         }, 1000);
         setTimeout(() => {
@@ -170,10 +170,10 @@ class Register extends Component {
                       className="glyphicon glyphicon-home"
                       aria-hidden="true"
                   />
-                                    Home
+                                    Trang chủ
                                 </a>
                             </li>
-                            <li className="active">Register Page</li>
+                            <li className="active">Đăng ký</li>
                         </ol>
                     </div>
                 </div>
@@ -181,12 +181,12 @@ class Register extends Component {
                 <div className="register">
                     <div className="container">
                         <h3 className="animated wow zoomIn" data-wow-delay=".5s">
-                            Register Here
+                            Đăng ký
                         </h3>
 
                         <div className="login-form-grids">
                             <h5 className="animated wow slideInUp" data-wow-delay=".5s">
-                                profile information
+                                Thông tin người dùng
                             </h5>
                             <form
                                 className="animated wow slideInUp"
@@ -194,17 +194,18 @@ class Register extends Component {
                                 onSubmit={this.onSubmit}
                             >
                                 <InputTemplate
-                                    id={"name"}
-                                    formdata={formdata.name}
-                                    change={element => this.updateForm(element)}
-                                />
-                                <InputTemplate
                                     id={"lastname"}
                                     formdata={formdata.lastname}
                                     change={element => this.updateForm(element)}
                                 />
+                                <InputTemplate
+                                    id={"name"}
+                                    formdata={formdata.name}
+                                    change={element => this.updateForm(element)}
+                                />
+                                
                                 <h6 className="animated wow slideInUp" data-wow-delay=".5s">
-                                    Login information
+                                    Thông tin đăng nhập
                                 </h6>
                                 <InputTemplate
                                     id={"email"}
@@ -222,16 +223,16 @@ class Register extends Component {
                                     change={element => this.updateForm(element)}
                                 />
                                 {this.state.formError ? (
-                                    <div className="error_label">Please check your data</div>
+                                    <div className="error_label">Vui lòng kiểm tra lại dữ liệu</div>
                                 ) : null}
-                                <input onClick={this.onSubmit} type="submit" value="Register"/>
+                                <input onClick={this.onSubmit} type="submit" value="Đăng ký"/>
                             </form>
                         </div>
                         <div
                             className="register-home animated wow slideInUp"
                             data-wow-delay=".5s"
                         >
-                            <Link to="/">Continue Shopping</Link>
+                            <Link to="/">Tiếp tục mua sắm</Link>
                         </div>
                     </div>
                 </div>

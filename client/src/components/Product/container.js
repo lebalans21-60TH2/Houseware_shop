@@ -73,43 +73,43 @@ class Container extends Component {
                     {/* Brands */}
                     <CollapseCheckbox
                         index="1"
-                        header="BRANDS"
+                        header="Thương hiệu"
                         lists={products.brands}
                         filters={filters => this.handleFilters(filters, "brand")}
                     />
                     {/* Capacity */}
-                    <CollapseCheckbox
+                    {/* <CollapseCheckbox
                         index="2"
                         header="Engine Capacity"
                         lists={capacity}
                         filters={filters => this.handleFilters(filters, "frets")}
-                    />
+                    /> */}
                     {/* Types */}
                     <CollapseCheckbox
                         index="3"
-                        header="Types"
+                        header="Sản phẩm"
                         lists={products.types}
                         filters={filters => this.handleFilters(filters, "wood")}
                     />
                     {/* Price */}
                     <CollapseRadio
                         index="3"
-                        header="Price"
+                        header="Giá"
                         lists={price}
                         filters={filters => this.handleFilters(filters, "price")}
                     />
-                    <div
+                    {/* <div
                         className="new-products animated wow slideInUp"
                         data-wow-delay=".5s"
                     >
-                        <h3>New Products</h3>
+                        <h3>Sản phẩm mới</h3>
                         <NewProducts
                             products={products}
                             addToCart0={this.props.addToCart0}
                             addToCart={this.props.addToCart}
                         />
-                    </div>
-                    <div
+                    </div> */}
+                    {/* <div
                         className="men-position animated wow slideInUp"
                         data-wow-delay=".5s"
                     >
@@ -122,7 +122,7 @@ class Container extends Component {
                                 <span>55%</span> Flat Discount
                             </h5>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="col-md-8 products-right">
                     {/* <div className="products-right-grid">

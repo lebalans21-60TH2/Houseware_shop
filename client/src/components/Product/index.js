@@ -68,10 +68,10 @@ class Product extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Products</li>
+              <li className="active">Sản phẩm</li>
             </ol>
           </div>
         </div>

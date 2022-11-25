@@ -12,6 +12,7 @@ import { Button, Modal, Form, Input, message, Popconfirm } from "antd";
 import NumberFormat from "react-number-format";
 import { withRouter, Link } from "react-router-dom";
 import Payment from "../../utils/payment";
+import currency from "currency-formatter";
 
 export class Cart extends Component {
   state = {
@@ -229,12 +230,13 @@ export class Cart extends Component {
           <li key={i}>
             {item.name}
             <span>
-              <NumberFormat
+              {/* <NumberFormat
                 value={parseInt(item.price, 10) * item.quantityCart}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"$"}
-              />{" "}
+              /> */}
+              {`${currency.format(item.price * item.quantityCart, {code:"VND"})}`}{" "}
             </span>
           </li>
         ))
@@ -245,14 +247,20 @@ export class Cart extends Component {
             <tr className="rem1">
               <td className="invert">{i + 1}</td>
               <td className="invert-image" style={{ width: "8em" }}>
-                <a href="single.html">
+              <Link to={`/product_detail/${item._id}`}><img
+                    src={item.images[0].url}
+                    alt=" "
+                    className="img-responsive"
+                    style={{ width: "6em", height: "6em" }}
+                  /></Link>
+                {/* <a href="single.html">
                   <img
                     src={item.images[0].url}
                     alt=" "
                     className="img-responsive"
                     style={{ width: "6em", height: "6em" }}
                   />
-                </a>
+                </a> */}
               </td>
               <td className="invert">
                 <div className="quantity">
@@ -284,21 +292,16 @@ export class Cart extends Component {
                     </div>
                   </div>
                 </div>
-              </td>
-              <td className="invert">{item.name}</td>
+              </td> 
+              <td className="invert"><Link to={`/product_detail/${item._id}`}>{item.name}</Link></td>
 
               <td className="invert">
-                <NumberFormat
-                  value={item.price}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
+              {`${currency.format(item.price, {code:"VND"})}`}
               </td>
               <td className="invert">
                 <div className="rem">
                   <Popconfirm
-                    title="Bạn có chắc chắn xóa nhiệm vụ này?"
+                    title="Bạn có chắc chắn xóa sản phẩm này?"
                     onConfirm={() => this.deleteItemFromCart(item._id)}
                     onCancel={this.cancel}
                     okText="Có"
@@ -337,10 +340,10 @@ export class Cart extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">My Cart</li>
+              <li className="active">Giỏ hàng</li>
             </ol>
           </div>
           <div className="clearfix" />
@@ -348,8 +351,8 @@ export class Cart extends Component {
         <br />
         <div className="container">
           <h3 className="animated wow slideInLeft" data-wow-delay=".5s">
-            Your shopping cart contains:{" "}
-            <span>{user.cartDetail ? user.cartDetail.length : 0} Products</span>
+            Số sản phẩm:{" "}
+            <span>{user.cartDetail ? user.cartDetail.length : 0} Sản phẩm</span>
           </h3>
           <div
             className="checkout-right animated wow slideInUp"
@@ -359,12 +362,12 @@ export class Cart extends Component {
               <table className="timetable_sub">
                 <tbody>
                   <tr>
-                    <th>SL No.</th>
-                    <th>Product</th>
-                    <th>Quality</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Remove</th>
+                    <th>STT.</th>
+                    <th>Hình ảnh</th>
+                    <th>Số lượng</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Xóa</th>
                   </tr>
                 </tbody>
 
@@ -391,12 +394,7 @@ export class Cart extends Component {
                   >
                     Tổng cộng{" "}
                     <span>
-                      <NumberFormat
-                        value={total}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
+                    {`${currency.format(total, {code:"VND"})}`}
                     </span>
                   </li>
                 </ul>
@@ -438,7 +436,7 @@ export class Cart extends Component {
           </div>
         </div>
         <Modal
-          title="Checkout"
+          title="Thanh toán"
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={[
@@ -452,7 +450,7 @@ export class Cart extends Component {
               loading={this.state.loading}
               onClick={this.paymentAtHome}
             >
-              Submit
+              Đồng ý
             </Button>
           ]}
         >
@@ -468,33 +466,33 @@ export class Cart extends Component {
                 disabled={true}
               />
             </Form.Item>
-            <Form.Item {...formItemLayout} label="First Name">
+            <Form.Item {...formItemLayout} label="Họ">
               {" "}
               <Input
-                placeholder="First Name"
+                placeholder="Họ"
                 value={userData ? userData.name : ""}
                 disabled={true}
                 label="First Name"
               />
             </Form.Item>
-            <Form.Item {...formItemLayout} label="Last Name">
+            <Form.Item {...formItemLayout} label="Tên">
               <Input
-                placeholder="Last Name"
+                placeholder="Tên"
                 value={userData ? userData.lastname : ""}
                 disabled={true}
               />
             </Form.Item>
-            <Form.Item {...formItemLayout} label="Address">
+            <Form.Item {...formItemLayout} label="Địa chỉ">
               {getFieldDecorator("address", {
                 rules: [
-                  { required: true, message: "Please input your address!" }
+                  { required: true, message: "Vui lòng nhập địa chỉ nhận hàng!" }
                 ]
-              })(<Input placeholder="Address" />)}
+              })(<Input placeholder="Địa chỉ" />)}
             </Form.Item>
-            <Form.Item {...formItemLayout} label="Phone">
+            <Form.Item {...formItemLayout} label="Sdt">
               {getFieldDecorator("phone", {
-                rules: [{ required: true, message: "Please input your phone!" }]
-              })(<Input placeholder="Phone" />)}
+                rules: [{ required: true, message: "Vui lòng nhập số điện thoại!" }]
+              })(<Input placeholder="Số điện thoại" />)}
             </Form.Item>
           </Form>
         </Modal>

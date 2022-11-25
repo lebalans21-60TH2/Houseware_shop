@@ -24,7 +24,7 @@ class RegisterLogin extends Component {
                 config: {
                     name: "email_input",
                     type: "email",
-                    placeholder: "Enter your email"
+                    placeholder: "Email..."
                 },
                 validation: {
                     required: true,
@@ -40,7 +40,7 @@ class RegisterLogin extends Component {
                 config: {
                     name: "password_input",
                     type: "password",
-                    placeholder: "Enter your password"
+                    placeholder: "Mật khẩu..."
                 },
                 validation: {
                     required: true
@@ -55,12 +55,12 @@ class RegisterLogin extends Component {
         let secondsToGo = 3;
         const modal = Modal.success({
             title: "SUCCESSFULLY !!",
-            content: `You will be redirected to the HOME after ${secondsToGo} second!`
+            content: `Trang chủ sẽ mở sau ${secondsToGo} giây!`
         });
         const timer = setInterval(() => {
             secondsToGo -= 1;
             modal.update({
-                content: `You will be redirected to the HOME after ${secondsToGo} second!`
+                content: `Trang chủ sẽ mở sau ${secondsToGo} giây!`
             });
         }, 1000);
         setTimeout(() => {
@@ -114,17 +114,17 @@ class RegisterLogin extends Component {
                             <li>
                                 <a href="index.html">
                                     <span className="glyphicon glyphicon-home" aria-hidden="true"/>
-                                    Home
+                                    Trang chủ
                                 </a>
                             </li>
-                            <li className="active">Login Page</li>
+                            <li className="active">Đăng nhập</li>
                         </ol>
                     </div>
                 </div>
                 <div className="login">
                     <div className="container">
                         <h3 className="animated wow zoomIn" data-wow-delay=".5s">
-                            Login Form
+                            Đăng nhập
                         </h3>
 
                         <div
@@ -143,23 +143,23 @@ class RegisterLogin extends Component {
                                     change={element => this.updateForm(element)} //element(id,event,blur) tu InputTemplate truyen ra
                                 />
                                 {formError ? (
-                                    <div className="error_label">Please check your data</div>
+                                    <div className="error_label">Email hoạc mật khẩu không đúng!!!</div>
                                 ) : null}
                                 <div className="forgot">
-                                    <Link to='/reset_user'>Forgot Password?</Link>
+                                    <Link to='/reset_user'>Quên mật khẩu?</Link>
                                 </div>
-                                <input onClick={this.submitForm} type="submit" value="Login"/>
+                                <input onClick={this.submitForm} type="submit" value="Đăng nhập"/>
                                 <a href="/auth/facebook"> <FacebookLoginButton/></a>
                                 <a href="/auth/google"><GoogleLoginButton/></a>
                             </form>
                         </div>
                         <h4 className="animated wow slideInUp" data-wow-delay=".5s">
-                            For New People
+                            
                         </h4>
                         <p className="animated wow slideInUp" data-wow-delay=".5s">
-                            <a href="register.html">Register Here</a> (Or) go back to{" "}
+                            <a href="register.html">Đăng ký</a> || {" "}
                             <a href="index.html">
-                                Home
+                                Trang chủ
                                 <span
                                     className="glyphicon glyphicon-menu-right"
                                     aria-hidden="true"

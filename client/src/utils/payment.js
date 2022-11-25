@@ -35,13 +35,13 @@ class Payment extends Component {
     };
 
     let env = "sandbox";
-    let currency = "USD";
+    let currency = "vnd";
     let total = this.props.toPay;
 
     const client = {
       sandbox:
-        "AfbA2-qjz92KhC5IDxvx2UpiIDBmSD7PdlKkZk1-OndNwg7Wc5wVAJKlPWQJcHwioMFz0kn4zOXnbqGW",
-      production: ""
+        "AQ-BiXEDsQ7IknXkqxJMVfxR5x2pAW-2cBPhr1nV-6hbLz2FKKF9hRNPHEjsyqDQ-6T2bPVcPOSV18g8",
+      production: "EOUb5fQ-zpd3s-9T1Nr98HAXCJ-2cpkbuzfQ5OqOhIXbAsM_ntoiZ8Dmu1iM1vKQcJyazX1HxJM8JAF7"
     };
 
     return (

@@ -5,6 +5,7 @@ import { Link, withRouter } from "react-router-dom";
 import { message, Icon } from "antd";
 import { connect } from "react-redux";
 import { deleteOrder } from "../../actions/user_actions";
+import currency from "currency-formatter";
 export class cartDetail extends Component {
   state = {
     user: {},
@@ -52,10 +53,10 @@ export class cartDetail extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Order Detail</li>
+              <li className="active">Thông tin đơn hàng</li>
             </ol>
           </div>
         </div>
@@ -66,14 +67,14 @@ export class cartDetail extends Component {
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6">
                 <address>
-                  <strong style={{ fontWeight: "bold" }}>Customer Name:</strong>{" "}
+                  <strong style={{ fontWeight: "bold" }}>Tên khách hàng:</strong>{" "}
                   {this.state.username}
                   <br />
                   {this.state.method === "Payment By Paypal" ? (
                     <>
                       {" "}
                       <strong style={{ fontWeight: "bold" }}>
-                        Address:
+                        Địa chỉ:
                       </strong>{" "}
                       {this.state.user
                         ? `${this.state.user.address.line1} ${
@@ -86,53 +87,53 @@ export class cartDetail extends Component {
                     <>
                       {" "}
                       <strong style={{ fontWeight: "bold" }}>
-                        Address:
+                        Địa chỉ:
                       </strong>{" "}
                       {this.state.user ? this.state.user.Address : ""}
                       <br />
                     </>
                   )}
                   <abbr title="Phone" style={{ fontWeight: "bold" }}>
-                    Phone:
+                    Số điện thoại:
                   </abbr>{" "}
                   {this.state.user ? this.state.user.Phone : ""}
                   <br />
                   <abbr title="Phone" style={{ fontWeight: "bold" }}>
-                    Payment Method:
+                    Phương thức thanh toán:
                   </abbr>{" "}
                   {this.state.method}
                 </address>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 text-right">
                 <p>
-                  <em style={{ fontWeight: "bold" }}>Date: </em>
+                  <em style={{ fontWeight: "bold" }}>Thời gian: </em>
                   {moment(new Date(Date.now())).format("LL")}
                 </p>
                 <p>
-                  <em style={{ fontWeight: "bold" }}>Receipt #: </em>
+                  <em style={{ fontWeight: "bold" }}>Hóa đơn #: </em>
                   {this.state.user ? this.state.user.paymentID : ""}
                 </p>
               </div>
             </div>
             <div className="row">
               <div className="text-center">
-                <h1>Receipt</h1>
+                <h1>Biên nhận</h1>
               </div>
 
               <table className="table table-hover">
                 <thead>
                   <tr>
                     <th>
-                      <strong>Product</strong>
+                      <strong>Sản phẩm</strong>
                     </th>
                     <th>
-                      <strong>Quantity</strong>
+                      <strong>Số lượng</strong>
                     </th>
                     <th className="text-center">
-                      <strong>Price</strong>
+                      <strong>Giá</strong>
                     </th>
                     <th className="text-center">
-                      <strong>Total</strong>
+                      <strong>Tổng cộng</strong>
                     </th>
                   </tr>
                 </thead>
@@ -151,21 +152,11 @@ export class cartDetail extends Component {
                             {item.quantityCart}{" "}
                           </td>
                           <td className="col-md-1 text-center">
-                            <NumberFormat
-                              value={item.price}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"$"}
-                            />
+                          {`${currency.format(item.price, {code:"VND"})}`}
                           </td>
                           <td className="col-md-1 text-center">
                             {" "}
-                            <NumberFormat
-                              value={parseInt(item.price * item.quantityCart, 10)}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"$"}
-                            />
+                            {`${currency.format(item.price * item.quantityCart, {code:"VND"})}`}
                           </td>
                         </tr>
                       ))
@@ -175,18 +166,13 @@ export class cartDetail extends Component {
                     <td>   </td>
                     <td className="text-right">
                       <h4>
-                        <strong>Total: </strong>
+                        <strong>Tổng: </strong>
                       </h4>
                     </td>
                     <td className="text-center text-danger">
                       <h4>
                         <strong>
-                          <NumberFormat
-                            value={this.state.amount}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"$"}
-                          />
+                         {`${currency.format(this.state.amount, {code:"VND"})}`}
                         </strong>
                       </h4>
                     </td>
@@ -199,7 +185,7 @@ export class cartDetail extends Component {
                   className="btn btn-success btn-lg btn-block"
                   style={{ background: "#ffc229", width: "100%" }}
                 >
-                  <Icon type="left" /> Continue Shopping
+                  <Icon type="left" /> Tiếp tục mua sắm
                 </button>
               </Link>
               {/* <div style={{ display: "flex" }}>

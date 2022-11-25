@@ -19,7 +19,7 @@ const Promotion = () => {
             data-wow-delay=".5s"
           >
             <h3>Newsletter</h3>
-            <p>Join us now to get all news and special offers.</p>
+            <p>Đăng ký để nhận tin tức về các khuyến mãi, sản phẩm mới nhất.</p>
             <form>
               <input type="submit" value="Shop Now" />
             </form>

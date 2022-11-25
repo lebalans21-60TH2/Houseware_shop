@@ -83,7 +83,7 @@ class Home extends Component {
     return (
       <div>
         <Slider />
-        <div className="banner-bottom">
+        {/* <div className="banner-bottom">
           <div className="container">
             <div className="banner-bottom-grids">
               <div
@@ -166,7 +166,7 @@ class Home extends Component {
               <div className="clearfix"> </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <BestSelling
           bySell={productsBySell}
           addToCart0={this.addToCart0}
@@ -178,7 +178,7 @@ class Home extends Component {
           addToCart0={this.addToCart0}
           addToCart={this.addToCart}
         />
-        <Promotion />
+        {/* <Promotion /> */}
       </div>
     );
   }

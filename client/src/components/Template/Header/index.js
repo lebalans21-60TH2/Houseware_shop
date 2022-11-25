@@ -8,15 +8,15 @@ import {searchProduct} from "../../../actions/products";
 class Header extends Component {
     state = {
         dataSource: [
-            "Z1000",
-            "Z800",
-            "CBR1000",
-            "BMW S1000RR",
-            "BMW",
-            "HONDA",
-            "YAMAHA",
-            "SUZUKI",
-            "KAWASAKI"
+            "Nồi",
+            "Chảo",
+            "Bếp điện",
+            "Tủ lạnh",
+            "Dao bếp",
+            "Máy giặt",
+            "Sunhouse",
+            "SATO",
+            "Bluestone"
         ],
         textSearch: "",
         open: false,
@@ -171,7 +171,7 @@ class Header extends Component {
                                         aria-hidden="true"
                                     />
                                     <a href="mailto:taihtgcs15415@fpt.edu.vn">
-                                        taihtgcs15415@fpt.edu.vn
+                                        admin123@gmail.com
                                     </a>
                                 </li>
                                 <li>
@@ -179,7 +179,7 @@ class Header extends Component {
                                         className="glyphicon glyphicon-earphone"
                                         aria-hidden="true"
                                     />
-                                    +(84) 905 55 1967
+                                    +(84) 320 435 654
                                 </li>
                                 {this.showLinks(user)}
                             </ul>
