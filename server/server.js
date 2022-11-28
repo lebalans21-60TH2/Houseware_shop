@@ -13,11 +13,16 @@ const app = express();
 const passport = require("passport");
 const mongoose = require("mongoose");
 const async = require("async");
+const cors = require("cors")
+const stripe =require("stripe")(process.env.STRIPE_SECRET_TEST)
+
 mongoose.Promise = global.Promise;
 mongoose
     .connect(process.env.DATABASE)
     .then(() => console.log("MongoDB Connected!"))
     .catch(err => console.log(err));
+
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -25,6 +30,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static("client/build"));
+app.use(cors())
 // UTILS
 const {sendEmail} = require("./utils/mail/index");
 cloudinary.config({
@@ -62,6 +68,32 @@ const {authAdmin} = require("./middleware/authAdmin");
 const {admin} = require("./middleware/admin");
 require("./services/passport");
 require("./routes/authRoutes")(app);
+
+//////////PAYMENT///
+app.post("/payment", cors(), async (req, res) =>{
+    let { amount, id } = req.body
+    try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "vnd",
+			description: "Spatula company",
+			payment_method: id,
+			confirm: true
+		})
+		console.log("Payment", payment)
+		res.json({
+			message: "Payment successful",
+			success: true
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+
+})
 ////////////////////////////////////////
 ///              REPORT
 ///////////////////////////////////////
@@ -808,7 +840,8 @@ app.post("/api/client/successBuy", auth, (req, res) => {
             id: item._id,
             price: item.price,
             quantity: item.quantityCart,
-            paymentId: req.body.paymentData.paymentID
+            paymentId: req.body.paymentData.paymentID,
+            paymentMethod: req.body.paymentData.method
         });
     });
 

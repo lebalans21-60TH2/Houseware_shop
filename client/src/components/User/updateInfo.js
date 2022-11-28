@@ -46,32 +46,13 @@ class UpdateInfo extends Component {
     return (
       <>
         <UserLayout>
-          <h2>Personal information</h2>
+          <h2>Thông tin cá nhân</h2>
           <Form onSubmit={this.handleSubmit}>
+            
             <Form.Item
               label={
                 <span>
-                  First Name&nbsp;
-                  <Tooltip title="Enter your first name!">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator("firstname", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please input your first name!",
-                    whitespace: true
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item
-              label={
-                <span>
-                  Last Name&nbsp;
+                  Họ &nbsp;
                   <Tooltip title="Enter your last name!">
                     <Icon type="question-circle-o" />
                   </Tooltip>
@@ -83,6 +64,26 @@ class UpdateInfo extends Component {
                   {
                     required: true,
                     message: "Please input your last name!",
+                    whitespace: true
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item
+              label={
+                <span>
+                  Tên &nbsp;
+                  <Tooltip title="Enter your first name!">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              }
+            >
+              {getFieldDecorator("firstname", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input your first name!",
                     whitespace: true
                   }
                 ]
@@ -118,7 +119,7 @@ class UpdateInfo extends Component {
                 htmlType="submit"
                 loading={this.state.loading}
               >
-                Update
+                Cập nhật
               </Button>
             </Form.Item>
           </Form>

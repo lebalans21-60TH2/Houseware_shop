@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import UserLayout from "../../hoc/user";
 import MyButton from "../../utils/button";
-import NumberFormat from "react-number-format";
 import MUIDataTable from "mui-datatables";
 import { Button, Badge, Icon, Spin, Popconfirm, message, Modal } from "antd";
 import { getHistoryPurchase, deleteOrder } from "../../actions/user_actions";
@@ -99,6 +98,7 @@ export class UserDashboard extends Component {
       responsive: "scroll",
       selectableRows: false,
     };
+    console.log(data);
     return (
       <UserLayout>
         <div>
@@ -200,7 +200,7 @@ export class UserDashboard extends Component {
                       ? `${userData[0].lastname} ${userData[0].name}`
                       : null}
                     <br />
-                    {data[0] ? (
+                    {/* {data[0] ? (
                       data[0].paymentID.includes("PAYID") ? (
                         <>
                           {" "}
@@ -221,24 +221,19 @@ export class UserDashboard extends Component {
                           <br />
                         </>
                       )
-                    ) : null}
+                    ) : null} */}
                     <abbr title="Phone" style={{ fontWeight: "bold" }}>
-                      Sdt:
+                      Địa chỉ:
                     </abbr>{" "}
                     {data[0]
-                      ? data[0].paymentID.includes("PAYID")
-                        ? "0905551967"
-                        : data[0].Phone
-                      : null}
+                      ? data[0].Address
+                        : null}
                     <br />
                     <abbr title="Phone" style={{ fontWeight: "bold" }}>
                       Hình thức thanh toán:
                     </abbr>{" "}
                     {data[0]
-                      ? data[0].paymentID.includes("PAYID")
-                        ? "Thanh toán bằng Paypal"
-                        : "Thanh toán khi nhận hàng"
-                      : null}
+                      ? data[0].method : null}
                   </address>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6 text-right">

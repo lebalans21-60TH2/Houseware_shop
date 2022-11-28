@@ -6,14 +6,21 @@ import {
   updateCartIn,
   updateCartDe,
   onSuccessBuy,
-  auth
+  auth,
 } from "../../actions/user_actions";
 import { Button, Modal, Form, Input, message, Popconfirm } from "antd";
-import NumberFormat from "react-number-format";
-import { withRouter, Link } from "react-router-dom";
-import Payment from "../../utils/payment";
-import currency from "currency-formatter";
 
+import { withRouter, Link } from "react-router-dom";
+
+import currency from "currency-formatter";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import FormPayment from "./FormPayment";
+
+const PUBLIC_KEY =
+  "pk_test_51M7bYzE0FWZxEukkmjkxfqp7Ewyh9ZCiyRGyaxMyt0OSgAsXEJRgBbV19772EjY5g5OzcAWbqBMrdcifuneuOtTt00lxQXQFjB";
+
+const stripeTestPromise = loadStripe(PUBLIC_KEY);
 export class Cart extends Component {
   state = {
     total: 0,
@@ -21,17 +28,19 @@ export class Cart extends Component {
     visible: false,
     cartDetail: [],
     userData: {},
-    quantity: 0
+    quantity: 0,
+    
   };
+
   componentDidMount() {
     let cartItems = [];
     let user = this.props.user;
     this.props
       .dispatch(auth())
-      .then(res => this.setState({ userData: res.payload }));
+      .then((res) => this.setState({ userData: res.payload }));
     if (user.userData.cart) {
       if (user.userData.cart.length > 0) {
-        user.userData.cart.forEach(item => {
+        user.userData.cart.forEach((item) => {
           cartItems.push(item.id);
         });
         this.props.dispatch(getCart(cartItems, user.userData.cart)).then(() => {
@@ -72,24 +81,24 @@ export class Cart extends Component {
   showModal = () => {
     this.props.form.setFields({ name: { value: "" } });
     this.setState({
-      visible: true
+      visible: true,
     });
   };
-  handleCancel = e => {
+  handleCancel = (e) => {
     this.setState({
       visible: false,
-      edit: false
+      edit: false,
     });
   };
-  totalAmount = cart => {
+  totalAmount = (cart) => {
     let total = 0;
-    cart.forEach(item => {
+    cart.forEach((item) => {
       total += parseInt(item.price, 10) * item.quantityCart;
     });
 
     this.setState({
       total,
-      showTotal: true
+      showTotal: true,
     });
   };
   findIndex = (products, id) => {
@@ -101,7 +110,7 @@ export class Cart extends Component {
     });
     return result;
   };
-  deleteItemFromCart = id => {
+  deleteItemFromCart = (id) => {
     let index = -1;
     const { cartDetail } = this.state;
     if (cartDetail) {
@@ -109,7 +118,7 @@ export class Cart extends Component {
       cartDetail.splice(index, 1);
       if (cartDetail.length <= 0) {
         this.setState({
-          showTotal: false
+          showTotal: false,
         });
       } else {
         this.totalAmount(cartDetail);
@@ -118,14 +127,14 @@ export class Cart extends Component {
     }
     this.props.dispatch(deleteCart(id));
   };
-  updateCartIn = id => {
+  updateCartIn = (id) => {
     const { cartDetail } = this.state;
     let updateIn = {
-      key: 1
+      key: 1,
     };
     this.props.dispatch(updateCartIn(id, updateIn));
     if (cartDetail) {
-      cartDetail.forEach(item => {
+      cartDetail.forEach((item) => {
         if (item._id === id) {
           item.quantityCart = item.quantityCart + 1;
           message.success("Update Successfully!");
@@ -135,11 +144,11 @@ export class Cart extends Component {
       });
     }
   };
-  updateCartDe = id => {
+  updateCartDe = (id) => {
     const { cartDetail } = this.state;
     this.props.dispatch(updateCartDe(id));
     if (cartDetail) {
-      cartDetail.forEach(item => {
+      cartDetail.forEach((item) => {
         if (item._id === id) {
           item.quantityCart = item.quantityCart - 1;
           this.setState({ cartDetail });
@@ -150,14 +159,15 @@ export class Cart extends Component {
     }
   };
 
-  paymentByPaypal = data => {
+  paymentByPaypal = (data) => {
+    
     const { userData, total } = this.state;
     let orderDetail = {
       user: data,
       cartDetail: this.props.user.cartDetail,
       total,
       method: "Thanh toán bằng Paypal",
-      username: userData.name
+      username: userData.name,
     };
     localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
     this.props
@@ -165,20 +175,21 @@ export class Cart extends Component {
         onSuccessBuy({
           cartDetail: this.props.user.cartDetail,
           paymentData: data,
-          amount: total
+          amount: total,
         })
       )
       .then(() => {
         if (this.props.user.successBuy) {
           this.setState({
             showTotal: false,
-            showSuccess: true
+            showSuccess: true,
           });
           this.props.history.push("/orderDetail");
         }
       });
   };
-  paymentAtHome = e => {
+
+  paymentAtHome = (e) => {
     const { form } = this.props;
     const { userData, total } = this.state;
 
@@ -190,14 +201,15 @@ export class Cart extends Component {
           paymentID: this.generateID(),
           Address: values.address,
           Phone: values.phone,
-          cancelled: false
+          cancelled: false,
+          method: "Thanh toán khi giao hàng",
         };
         let orderDetail = {
           user: data,
           username: userData.name,
           cartDetail: newCartDetail,
           total,
-          method: "Thanh toán khi giao hàng"
+          method: "Thanh toán khi giao hàng",
         };
         localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
         this.props
@@ -205,7 +217,7 @@ export class Cart extends Component {
             onSuccessBuy({
               cartDetail: this.props.user.cartDetail,
               paymentData: data,
-              amount: total
+              amount: total,
             })
           )
           .then(() => {
@@ -213,17 +225,64 @@ export class Cart extends Component {
               this.setState({
                 showTotal: false,
                 showSuccess: true,
-                visible: false
+                visible: false,
               });
               this.props.history.push("/orderDetail");
             }
           });
       }
     });
+    
+  };
+  paymentAtVisa = (e) => {
+    const { form } = this.props;
+    const { userData, total } = this.state;
+
+    e.preventDefault();
+    form.validateFields((err, values) => {
+      let newCartDetail = this.props.user.cartDetail;
+      if (!err) {
+        let data = {
+          paymentID: this.generateID(),
+          Address: values.address,
+          Phone: values.phone,
+          cancelled: false,
+          method: "Thanh toán bằng thẻ tín dụng",
+        };
+        let orderDetail = {
+          user: data,
+          username: userData.name,
+          cartDetail: newCartDetail,
+          total,
+          method: "Thanh toán bằng thẻ tín dụng",
+        };
+        localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
+        this.props
+          .dispatch(
+            onSuccessBuy({
+              cartDetail: this.props.user.cartDetail,
+              paymentData: data,
+              amount: total,
+            })
+          )
+          .then(() => {
+            if (this.props.user.successBuy) {
+              this.setState({
+                showTotal: false,
+                showSuccess: true,
+                visible: false,
+              });
+              this.props.history.push("/orderDetail");
+            }
+          });
+      }
+    });
+    
   };
   render() {
     const { user } = this.props;
     const { total, userData, cartDetail } = this.state;
+   
 
     const totalProducts = cartDetail
       ? cartDetail.map((item, i) => (
@@ -236,7 +295,9 @@ export class Cart extends Component {
                 thousandSeparator={true}
                 prefix={"$"}
               /> */}
-              {`${currency.format(item.price * item.quantityCart, {code:"VND"})}`}{" "}
+              {`${currency.format(item.price * item.quantityCart, {
+                code: "VND",
+              })}`}{" "}
             </span>
           </li>
         ))
@@ -247,12 +308,14 @@ export class Cart extends Component {
             <tr className="rem1">
               <td className="invert">{i + 1}</td>
               <td className="invert-image" style={{ width: "8em" }}>
-              <Link to={`/product_detail/${item._id}`}><img
+                <Link to={`/product_detail/${item._id}`}>
+                  <img
                     src={item.images[0].url}
                     alt=" "
                     className="img-responsive"
                     style={{ width: "6em", height: "6em" }}
-                  /></Link>
+                  />
+                </Link>
                 {/* <a href="single.html">
                   <img
                     src={item.images[0].url}
@@ -292,11 +355,13 @@ export class Cart extends Component {
                     </div>
                   </div>
                 </div>
-              </td> 
-              <td className="invert"><Link to={`/product_detail/${item._id}`}>{item.name}</Link></td>
+              </td>
+              <td className="invert">
+                <Link to={`/product_detail/${item._id}`}>{item.name}</Link>
+              </td>
 
               <td className="invert">
-              {`${currency.format(item.price, {code:"VND"})}`}
+                {`${currency.format(item.price, { code: "VND" })}`}
               </td>
               <td className="invert">
                 <div className="rem">
@@ -318,12 +383,12 @@ export class Cart extends Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 }
+        sm: { span: 8 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
-      }
+        sm: { span: 16 },
+      },
     };
     const { getFieldDecorator } = this.props.form;
     return (
@@ -389,13 +454,11 @@ export class Cart extends Component {
                     style={{
                       borderTop: "1px solid black",
                       color: "black",
-                      fontSize: "1.5em"
+                      fontSize: "1.5em",
                     }}
                   >
                     Tổng cộng{" "}
-                    <span>
-                    {`${currency.format(total, {code:"VND"})}`}
-                    </span>
+                    <span>{`${currency.format(total, { code: "VND" })}`}</span>
                   </li>
                 </ul>
                 <Button
@@ -404,17 +467,19 @@ export class Cart extends Component {
                   size="large"
                   onClick={this.showModal}
                 >
-                  
-                  THANH TOÁN KHI GIAO HÀNG(COD)
+                  THANH TOÁN 
                 </Button>
-                <div className="paypal_button_container">
+                {/* <div className="paypal_button_container">
                   <Payment
                     toPay={this.state.total}
                     transactionError={data => this.transactionError(data)}
                     transactionCanceled={data => this.transactionCanceled(data)}
                     onSuccess={data => this.paymentByPaypal(data)}
                   />
-                </div>
+                  <Elements stripe={stripeTestPromise}>
+                    <FormPayment state={this.state} />
+                  </Elements>
+                </div> */}
               </div>
             ) : (
               ""
@@ -436,6 +501,7 @@ export class Cart extends Component {
           </div>
         </div>
         <Modal
+        style={{height:"100vh"}}
           title="Thanh toán"
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -450,12 +516,21 @@ export class Cart extends Component {
               loading={this.state.loading}
               onClick={this.paymentAtHome}
             >
-              Đồng ý
-            </Button>
+              Thanh toán khi giao hàng
+            </Button>,
+          //   <Button
+          //   key="submit"
+          //   type="primary"
+          //   htmlType="submit"
+          //   loading={this.state.loading}
+          //   onClick={this.paymentAtVisa}
+          // >
+          //   Thanh toán bằng thẻ 
+          // </Button>,
           ]}
         >
           <Form
-            onSubmit={this.paymentAtHome}
+            onSubmit={this.paymentAtHome && this.paymentAtVisa}
             className="login-form"
             style={{ margin: "0 auto" }}
           >
@@ -485,24 +560,33 @@ export class Cart extends Component {
             <Form.Item {...formItemLayout} label="Địa chỉ">
               {getFieldDecorator("address", {
                 rules: [
-                  { required: true, message: "Vui lòng nhập địa chỉ nhận hàng!" }
-                ]
+                  {
+                    required: true,
+                    message: "Vui lòng nhập địa chỉ nhận hàng!",
+                  },
+                ],
               })(<Input placeholder="Địa chỉ" />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Sdt">
               {getFieldDecorator("phone", {
-                rules: [{ required: true, message: "Vui lòng nhập số điện thoại!" }]
+                rules: [
+                  { required: true, message: "Vui lòng nhập số điện thoại!" },
+                ],
               })(<Input placeholder="Số điện thoại" />)}
             </Form.Item>
+            <h2>Thanh toán trực tuyến:</h2>
+            <Elements stripe={stripeTestPromise}>
+                    <FormPayment state={this.state} />
+                  </Elements>
           </Form>
         </Modal>
       </div>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 const CartForm = Form.create()(Cart);

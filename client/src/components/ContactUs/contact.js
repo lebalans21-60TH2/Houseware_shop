@@ -17,10 +17,10 @@ export class ContactUs extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Mail Us</li>
+              <li className="active">Liên hệ</li>
             </ol>
           </div>
         </div>
@@ -28,21 +28,21 @@ export class ContactUs extends Component {
         {/* mail */}
         <div className="mail animated wow zoomIn" data-wow-delay=".5s">
           <div className="container">
-            <h3>Mail Us</h3>
+            <h3>Inbox qua Email</h3>
             <div className="mail-grids">
               <div
                 className="col-md-8 mail-grid-left animated wow slideInLeft"
                 data-wow-delay=".5s"
               >
                 <form>
-                  <input type="text" placeholder="Name" required />
+                  <input type="text" placeholder="Tên" required />
                   <input type="email" placeholder="Email" required />
-                  <input type="text" defaultValue="Subject" required />
-                  <textarea type="text" required defaultValue={"Message..."} />
+                  <input type="text" defaultValue="Chủ đề" required />
+                  <textarea type="text" required defaultValue={"Lời nhắn..."} />
                   <input type="submit" defaultValue="Submit Now" />
                 </form>
               </div>
-              <div
+              {/* <div
                 className="col-md-4 mail-grid-right animated wow slideInRight"
                 data-wow-delay=".5s"
               >
@@ -93,7 +93,7 @@ export class ContactUs extends Component {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
               <div className="clearfix"> </div>
             </div>
             <iframe

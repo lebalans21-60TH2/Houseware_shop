@@ -52,8 +52,9 @@ body {
   border-bottom: 1px solid white;
   color: #303030;
   text-decoration: none;
-  background-color: #ffc229;
+  background-color: #ffe44d;
   transition: all 0.3s linear;
+  border-radius: 10px;
 }
 
 #cart-side-plus i {
@@ -92,6 +93,8 @@ body {
   border-top: 1px solid white;
   background-color: #ffc229;
   transition: all 0.3s linear;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .ant-col-sm-8 {
   display: block;

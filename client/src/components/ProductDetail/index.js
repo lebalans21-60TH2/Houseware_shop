@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NumberFormat from "react-number-format";
 import ProdImg from "./prodImg";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faTruck from "@fortawesome/fontawesome-free-solid/faTruck";

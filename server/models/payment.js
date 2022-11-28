@@ -13,6 +13,10 @@ const paymentSchema = mongoose.Schema({
     type: Array,
     default: []
   },
+  paymentMethod: {
+    type: String,
+    
+  },
   status: {
     type: String,
     maxlength: 100,
