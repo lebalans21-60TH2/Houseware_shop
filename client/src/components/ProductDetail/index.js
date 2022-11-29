@@ -14,8 +14,9 @@ import currency from "currency-formatter";
 import "../../newCss/css/styles1.css";
 class ProductPage extends Component {
   state = {
-    quantity: 1
+    quantity: 1,
   };
+
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.dispatch(getProductDetail(id)).then(() => {
@@ -28,10 +29,12 @@ class ProductPage extends Component {
   componentWillUnmount() {
     this.props.dispatch(clearProductDetail());
   }
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ quantity: parseInt(e.target.value, 10) });
   };
-  addToCart0 = id => {
+ 
+
+  addToCart0 = (id) => {
     const { user } = this.props;
     if (user.userData.isAuth) {
       this.props.dispatch(addToCart(id, this.state));
@@ -40,12 +43,13 @@ class ProductPage extends Component {
       message.error("Bạn phải đăng nhập trước!");
     }
   };
-  addToCartHandler = id => {
+  addToCartHandler = (id) => {
     const { user } = this.props;
     const { quantity } = this.state;
+    console.log(this.state.quantity);
 
     if (user.cartDetail) {
-      user.cartDetail.forEach(item => {
+      user.cartDetail.forEach((item) => {
         if (item._id === id) {
           if (
             item.quantityCart < item.quantity &&
@@ -59,7 +63,7 @@ class ProductPage extends Component {
       });
       if (
         user.cartDetail
-          .map(item => {
+          .map((item) => {
             return item._id;
           })
           .indexOf(id) === -1
@@ -94,7 +98,7 @@ class ProductPage extends Component {
             </ol>
           </div>
         </div>
-        <div className="container" style={{marginTop:"1.5vmax"}}>
+        <div className="container" style={{ marginTop: "1.5vmax" }}>
           {productDetail ? (
             <div className="col-md-12 single-right">
               <div
@@ -111,11 +115,17 @@ class ProductPage extends Component {
                 className="col-md-7 single-right-left simpleCart_shelfItem animated wow slideInRight"
                 data-wow-delay=".5s"
               >
-                <h3 style={{fontWeight:"bold"}}>{productDetail ? productDetail.name : ""}</h3>
+                <h3 style={{ fontWeight: "bold" }}>
+                  {productDetail ? productDetail.name : ""}
+                </h3>
                 <h4>
                   <span className="item_price">
                     {productDetail ? (
-                      <span style={{fontWeight:"550", fontSize:"1.3em"}}>{`${currency.format(productDetail.price, {code:"VND"})}`}</span>
+                      <span
+                        style={{ fontWeight: "550", fontSize: "1.3em" }}
+                      >{`${currency.format(productDetail.price, {
+                        code: "VND",
+                      })}`}</span>
                     ) : (
                       ""
                     )}
@@ -138,8 +148,8 @@ class ProductPage extends Component {
                 </div> */}
                 <div className="color-quality">
                   <div className="color-quality-left">
-                    <h5 style={{fontWeight:"bold"}}>Số lượng :</h5>
-                    <select
+                    <h5 style={{ fontWeight: "bold" }}>Số lượng :</h5>
+                    {/* <select
                       id="country1"
                       onChange={this.onChange}
                       className="frm-field required sect"
@@ -149,13 +159,43 @@ class ProductPage extends Component {
                       <option value={3}>3 </option>
                       <option value={4}>4 </option>
                       <option value={5}>5 </option>
-                    </select>
+                    </select> */}
+
+                    <div className="quantity">
+                      <div className="quantity-select">
+                        <div
+                          className="entry value-minus"
+                          style={
+                            this.state.quantity === 1 
+                              ? { pointerEvents: "none", opacity: 0.4 }
+                              : null
+                          }
+                          onClick={() => this.setState({quantity: this.state.quantity - 1})}
+                        >
+                          &nbsp;
+                        </div>
+                        <div className="entry value">
+                          <span>{this.state.quantity}</span>
+                        </div>
+                        <div
+                          className="entry value-plus active"
+                          style={
+                            this.state.quantity >= this.state.quantity
+                              ? { opacity: 0.4 }
+                              : null
+                          }
+                          onClick={() =>this.setState({quantity: this.state.quantity + 1})}
+                        >
+                          &nbsp;
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="clearfix"> </div>
                 </div>
                 <div className="occasional">
                   <div className="product_tags">
-                  <h5 style={{fontWeight:"bold"}}>Giao hàng:</h5>
+                    <h5 style={{ fontWeight: "bold" }}>Giao hàng:</h5>
                     {productDetail.shipping ? (
                       <div className="tag">
                         <div>
@@ -166,9 +206,10 @@ class ProductPage extends Component {
                           {/* <div>And return</div> */}
                         </div>
                       </div>
-                    ) : null}
-                    {" "}
-                     <h5 style={{fontWeight:"bold", marginTop:"9px"}}>Trạng thái:</h5>
+                    ) : null}{" "}
+                    <h5 style={{ fontWeight: "bold", marginTop: "9px" }}>
+                      Trạng thái:
+                    </h5>
                     {productDetail.available ? (
                       <div className="tag">
                         <div>
@@ -309,10 +350,10 @@ class ProductPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
   };
 };
 

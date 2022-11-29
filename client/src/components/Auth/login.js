@@ -149,8 +149,8 @@ class RegisterLogin extends Component {
                                     <Link to='/reset_user'>Quên mật khẩu?</Link>
                                 </div>
                                 <input onClick={this.submitForm} type="submit" value="Đăng nhập"/>
-                                <a href="/auth/facebook"> <FacebookLoginButton/></a>
-                                <a href="/auth/google"><GoogleLoginButton/></a>
+                                {/* <a href="/auth/facebook"> <FacebookLoginButton/></a>
+                                <a href="/auth/google"><GoogleLoginButton/></a> */}
                             </form>
                         </div>
                         <h4 className="animated wow slideInUp" data-wow-delay=".5s">
