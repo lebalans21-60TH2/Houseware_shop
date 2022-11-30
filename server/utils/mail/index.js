@@ -27,7 +27,7 @@ const getEmailData = (to,name,token,template,actionData) =>{
         break;
         case "reset_password":
             data = {
-                from: "Motor Shopping <thanhtai16969@gmail.com>",
+                from: "Warehouse Store",
                 to,
                 subject: `Hey ${name}, reset your pass`,
                 html: resetPass(actionData)
@@ -43,10 +43,12 @@ const getEmailData = (to,name,token,template,actionData) =>{
 const sendEmail = (to,name,token,type,actionData = null) => {
 
     const smtpTransport = mailer.createTransport({
+      
+      
         service:"Gmail",
         auth:{
-            user: "thanhtai16969@gmail.com",
-            pass: 'tainganhnganh0408'
+            user: "army24062000@gmail.com",
+            pass: 'xrtjrbbuapcolcge'
         }
     });
 

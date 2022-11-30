@@ -16,6 +16,7 @@ const async = require("async");
 const cors = require("cors")
 const stripe =require("stripe")(process.env.STRIPE_SECRET_TEST)
 
+
 mongoose.Promise = global.Promise;
 mongoose
     .connect(process.env.DATABASE)
@@ -540,10 +541,12 @@ app.post("/api/client/reset_user", (req, res) => {
     User.findOne({email: req.body.email}, (err, user) => {
         user.generateResetToken((err, user) => {
             if (err) return res.json({success: false, err});
+            // sendEmail(user.email, user.name, null, "reset_password", user);
             sendEmail(user.email, user.name, null, "reset_password", user);
             return res.json({success: true});
         });
     });
+   
 });
 
 app.post("/api/client/reset_password", (req, res) => {
@@ -552,6 +555,9 @@ app.post("/api/client/reset_password", (req, res) => {
         .valueOf();
     User.findOne(
         {
+            // resetToken: req.body.resetToken,
+            // resetTokenExp: {
+            //     $gte: today
             resetToken: req.body.resetToken,
             resetTokenExp: {
                 $gte: today

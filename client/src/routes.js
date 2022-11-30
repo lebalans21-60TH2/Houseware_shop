@@ -16,6 +16,7 @@ import ResetUser from "./components/Reset_client";
 import ContactUs from "./components/ContactUs/contact";
 import UpdateInfo from "./components/User/updateInfo";
 import Not_found from "./components/PageNot/not_found";
+import updatePassword from "./components/User/updatePassword"
 
 const Routes = () => {
     return (
@@ -40,6 +41,11 @@ const Routes = () => {
                     path="/user/updateProfile"
                     exact
                     component={Auth(UpdateInfo, true)}
+                />
+                <Route
+                    path="/user/updatePassword"
+                    exact
+                    component={Auth(updatePassword, true)}
                 />
                 <Route path="/orderDetail" exact component={Auth(cartDetail, true)}/>
                 <Route path="/cart" exact component={Auth(Cart, true)}/>

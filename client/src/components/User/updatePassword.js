@@ -15,13 +15,14 @@ class ResetPass extends Component {
     formErrorMessage: "",
     formSuccess: "",
     formdata: {
+       
       password: {
         element: "input",
         value: "",
         config: {
           name: "password_input",
           type: "password",
-          placeholder: "Enter your password"
+          placeholder: "Mật khảu mới"
         },
         validation: {
           required: true
@@ -36,7 +37,7 @@ class ResetPass extends Component {
         config: {
           name: "confirm_password_input",
           type: "password",
-          placeholder: "Confirm your password"
+          placeholder: "Xác nhạn mật khẩu"
         },
         validation: {
           required: true,
@@ -68,7 +69,7 @@ class ResetPass extends Component {
     const timer = setInterval(() => {
       secondsToGo -= 1;
       modal.update({
-        content: `You will be redirected to the HOME after ${secondsToGo} second!`
+        content: `Trang chủ sẽ mở sau ${secondsToGo} giây!`
       });
     }, 1000);
     setTimeout(() => {
@@ -98,7 +99,7 @@ class ResetPass extends Component {
             this.setState({ formError: false, formSuccess: true });
             this.countDown();
             setTimeout(() => {
-              this.props.history.push("/register_login");
+              this.props.history.push("/");
             }, 3000);
           }
         });
@@ -125,23 +126,28 @@ class ResetPass extends Component {
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Reset Password</li>
+              <li className="active">Đổi mật khẩu</li>
             </ol>
           </div>
         </div>
         <div className="login">
           <div className="container">
             <h3 className="animated wow zoomIn" data-wow-delay=".5s">
-              Reset Password
+             Đổi mật khẩu
             </h3>
             <div
               className="login-form-grids animated wow slideInUp"
               data-wow-delay=".5s"
             >
               <form onSubmit={this.submitForm}>
+              {/* <InputTemplate
+                  id={"oldPassword"}
+                  formdata={formdata.oldPassword}
+                  change={element => this.updateForm(element)}
+                /> */}
                 <InputTemplate
                   id={"password"}
                   formdata={formdata.password}
@@ -160,7 +166,7 @@ class ResetPass extends Component {
                 <input
                   onClick={this.submitForm}
                   type="submit"
-                  value="Reset password"
+                  value="Đặt lại mật khẩu"
                 />
               </form>
             </div>

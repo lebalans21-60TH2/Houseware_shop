@@ -32,7 +32,6 @@ class ProductPage extends Component {
   onChange = (e) => {
     this.setState({ quantity: parseInt(e.target.value, 10) });
   };
- 
 
   addToCart0 = (id) => {
     const { user } = this.props;
@@ -166,11 +165,13 @@ class ProductPage extends Component {
                         <div
                           className="entry value-minus"
                           style={
-                            this.state.quantity === 1 
+                            this.state.quantity === 1
                               ? { pointerEvents: "none", opacity: 0.4 }
                               : null
                           }
-                          onClick={() => this.setState({quantity: this.state.quantity - 1})}
+                          onClick={() =>
+                            this.setState({ quantity: this.state.quantity - 1 })
+                          }
                         >
                           &nbsp;
                         </div>
@@ -184,7 +185,9 @@ class ProductPage extends Component {
                               ? { opacity: 0.4 }
                               : null
                           }
-                          onClick={() =>this.setState({quantity: this.state.quantity + 1})}
+                          onClick={() =>
+                            this.setState({ quantity: this.state.quantity + 1 })
+                          }
                         >
                           &nbsp;
                         </div>
@@ -193,7 +196,11 @@ class ProductPage extends Component {
                   </div>
                   <div className="clearfix"> </div>
                 </div>
-                <div className="occasional">
+               <div className="occasional">
+               <div>
+                    <h5 style={{ fontWeight: "bold" }}>Số lượng còn: {productDetail ? productDetail.quantity : ""} </h5>
+
+                    </div>
                   <div className="product_tags">
                     <h5 style={{ fontWeight: "bold" }}>Giao hàng:</h5>
                     {productDetail.shipping ? (

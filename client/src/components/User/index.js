@@ -130,6 +130,11 @@ export class UserDashboard extends Component {
               title="Chỉnh sửa thông tin"
               LinkTo="/user/updateProfile"
             />
+            <MyButton
+              type="default"
+              title="Chỉnh sửa mật khẩu"
+              LinkTo="/user/updatePassword"
+            />
           </div>
 
           {user.payments ? (
