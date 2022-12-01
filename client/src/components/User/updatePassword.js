@@ -1,137 +1,196 @@
 import React, { Component } from "react";
-import UserLayout from "../../hoc/user";
-import { connect } from "react-redux";
-import { Form, Input, Tooltip, Icon, Button, message } from "antd";
-import { updateUserData } from "../../actions/user_actions";
-import { withRouter } from "react-router-dom";
-
-class UpdateInfo extends Component {
+import axios from "axios";
+import { Modal } from "antd";
+import "antd/dist/antd.css";
+import InputTemplate from "../../utils/Form/inputTemplate";
+import {
+  update,
+  generateData,
+  isFormValid
+} from "../../utils/Form/validateForm";
+class updatepassword extends Component {
   state = {
-    loading: false
+   
+    formError: false,
+    formErrorMessage: "",
+    formSuccess: "",
+    formdata: {
+      password: {
+        element: "input",
+        value: "",
+        config: {
+          name: "password_input",
+          type: "password",
+          placeholder: "Nhập mật khẩu "
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        validationMessage: ""
+      },
+      newpassword: {
+        element: "input",
+        value: "",
+        config: {
+          name: "password_input",
+          type: "password",
+          placeholder: "Nhập mật khẩu mới"
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        validationMessage: ""
+      },
+      confirmPassword: {
+        element: "input",
+        value: "",
+        config: {
+          name: "confirm_password_input",
+          type: "password",
+          placeholder: "Nhập lại mật khẩu mới"
+        },
+        validation: {
+          required: true,
+          confirm: "newpassword"
+        },
+        valid: false,
+        touched: false,
+        validationMessage: ""
+      }
+    }
   };
   componentDidMount() {
+    // const resetToken = this.props.match.params.token;
+    // this.setState({ resetToken });
     const { form, user } = this.props;
-    if (user.userData) {
-      form.setFields({
-        firstname: { value: user.userData.name },
-        lastname: { value: user.userData.lastname },
-        email: { value: user.userData.email }
-      });
-    }
+   
   }
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({ loading: true });
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        let dataSubmit = {
-          name: values.firstname,
-          lastname: values.lastname,
-          email: values.email
-        };
-        this.props.dispatch(updateUserData(dataSubmit)).then(res => {
-          if (res.payload.success) {
-            message.success("Update Information Successfully!");
-            this.setState({ loading: false });
-            this.props.history.push("/");
-          }else{
-            message.error("Update Information Failed!");
-          }
-        });
-      }
+  updateForm = element => {
+    const newFormdata = update(element, this.state.formdata, "update_password");
+    this.setState({
+      formError: false,
+      formdata: newFormdata
     });
   };
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <>
-        <UserLayout>
-          <h2>Thông tin cá nhân</h2>
-          <Form onSubmit={this.handleSubmit}>
-            
-            <Form.Item
-              label={
-                <span>
-                  Họ &nbsp;
-                  <Tooltip title="Enter your last name!">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator("lastname", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please input your last name!",
-                    whitespace: true
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item
-              label={
-                <span>
-                  Tên &nbsp;
-                  <Tooltip title="Enter your first name!">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator("firstname", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please input your first name!",
-                    whitespace: true
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
-            <Form.Item
-              label={
-                <span>
-                  Email&nbsp;
-                  <Tooltip title="Enter your email!">
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              }
-            >
-              {getFieldDecorator("email", {
-                rules: [
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!"
-                  },
-                  {
-                    required: true,
-                    message: "Please input your E-mail!"
-                  }
-                ]
-              })(<Input />)}
-            </Form.Item>
+  countDown = () => {
+    let secondsToGo = 3;
+    const modal = Modal.success({
+      title: "Đặt lại mật khẩu thành công !!",
+      content: `Trang chủ sẽ mở sau ${secondsToGo} giây!`
+    });
+    const timer = setInterval(() => {
+      secondsToGo -= 1;
+      modal.update({
+        content: `Trang chủ sẽ mở sau ${secondsToGo} giây!`
+      });
+    }, 1000);
+    setTimeout(() => {
+      clearInterval(timer);
+      modal.destroy();
+    }, secondsToGo * 1000);
+  };
+  submitForm = event => {
+    event.preventDefault();
 
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                loading={this.state.loading}
-              >
-                Cập nhật
-              </Button>
-            </Form.Item>
-          </Form>
-        </UserLayout>
-      </>
+    let dataToSubmit = generateData(this.state.formdata, "update_password");
+    let formIsValid = isFormValid(this.state.formdata, "update_password");
+
+    if (formIsValid) {
+      axios
+        .post("/api/client/update_password", {
+          ...dataToSubmit,
+         
+        })
+        .then(response => {
+          if (!response.data.success) {
+            this.setState({
+              formError: true,
+              formErrorMessage: response.data.message
+            });
+          } else {
+            this.setState({ formError: false, formSuccess: true });
+            this.countDown();
+            setTimeout(() => {
+              this.props.history.push("/");
+            }, 3000);
+          }
+        });
+    } else {
+      this.setState({
+        formError: true
+      });
+    }
+  };
+
+  render() {
+    const { formErrorMessage, formError, formdata } = this.state;
+    return (
+      <div>
+        <div className="breadcrumbs">
+          <div className="container">
+            <ol
+              className="breadcrumb breadcrumb1 animated wow slideInLeft"
+              data-wow-delay=".5s"
+            >
+              <li>
+                <a href="/">
+                  <span
+                    className="glyphicon glyphicon-home"
+                    aria-hidden="true"
+                  />
+                  Trang chủ
+                </a>
+              </li>
+              <li className="active">Đổi mật khẩu</li>
+            </ol>
+          </div>
+        </div>
+        <div className="login">
+          <div className="container">
+            <h3 className="animated wow zoomIn" data-wow-delay=".5s">
+              Đổi mật khẩu
+            </h3>
+            <div
+              className="login-form-grids animated wow slideInUp"
+              data-wow-delay=".5s"
+            >
+              <form onSubmit={this.submitForm}>
+                <InputTemplate
+                  id={"password"}
+                  formdata={formdata.password}
+                  change={element => this.updateForm(element)}
+                />
+                 <InputTemplate
+                  id={"newpassword"}
+                  formdata={formdata.newpassword}
+                  change={element => this.updateForm(element)}
+                />
+                <InputTemplate
+                  id={"confirmPassword"}
+                  formdata={formdata.confirmPassword}
+                  change={element => this.updateForm(element)}
+                />
+                {formError ? (
+                  <div className="error_label">{formErrorMessage}</div>
+                ) : (
+                  ""
+                )}
+                <input
+                  onClick={this.submitForm}
+                  type="submit"
+                  value="Đổi mật khẩu"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-const WrappedRegistrationForm = Form.create()(UpdateInfo);
-export default connect(mapStateToProps)(withRouter(WrappedRegistrationForm));
+
+export default updatepassword;

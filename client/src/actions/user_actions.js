@@ -78,6 +78,19 @@ export const updateUserData = dataToSubmit => {
     };
 };
 
+// Update Profile User
+export const updateUserPassword = dataToSubmit => {
+    const request = axios
+        .post(`${urlApi.USER_SERVER}/update_password`, dataToSubmit)
+        .then(response => {
+            return response.data;
+        });
+    return {
+        type: Types.UPDATE_DATA_USER,
+        payload: request
+    };
+};
+
 //Log out
 export const Logout = () => {
     const request = axios

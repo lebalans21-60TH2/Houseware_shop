@@ -583,6 +583,35 @@ app.post("/api/client/reset_password", (req, res) => {
         }
     );
 });
+app.post("/api/client/update_password", auth, (req, res) => {
+   
+    User.findOneAndUpdate(
+        {_id: req.user._id,
+        id: req.body.id,}, {new: true}, (err, user) => {
+            if (!user)
+                return res.json({
+                    success: false,
+                    message: "Sorry, token bad please try again!."
+                });
+                user.comparePassword(req.body.password, (err, isMatch) => {
+                            if (!isMatch)
+                                return res.json({success: false, message: "Password cũ không khớp!"});
+            user.password = req.body.newpassword;
+            user.save((err, doc) => {
+                if (err) return res.json({success: false, err});
+                return res.status(200).send({
+                    success: true
+                });
+            });
+        });
+    
+            
+        }
+       
+        
+        
+    );
+    });
 
 app.get("/api/client/auth", auth, (req, res) => {
     res.status(200).json({
@@ -687,69 +716,7 @@ app.post("/api/client/update_profile", auth, (req, res) => {
         }
     );
 });
-app.post("/api/client/update_password", auth, (req, res) => {
-//     User.findById(req.user.id).select("+password");
 
-//     const isPasswordMatched = User.comparePasswords(req.body.oldPassword);
-  
-//     if (!isPasswordMatched) {
-//         return res.json({success: false, err});
-//     }
-  
-//     if (req.body.newPassword !== req.body.confirmPassword) {
-//         return res.json({success: false, err});
-//     }
-  
-//     User.password = req.body.newPassword;
-  
-//     User.save();
-  
-//   return res.status(200).send({
-//     success: true
-// });
-//   User.findById({id: req.user._id}, (err, user) => {
-   
-//     // check password
-//     user.comparePassword(req.body.password, (err, isMatch) => {
-//         if (!isMatch)
-//             return res.json({loginSuccess: false, message: "Password ko khop"});
-//         // generate Token
-//         user.password = req.body.newPassword;
-  
-//         user.save((err, doc) => {
-//             if (err) return res.json({success: false, err});
-//             return res.status(200).json({
-//                 success: true
-//             });
-//         });
-//     });
-// });
-User.findOneAndUpdate(
-    {_id: req.user._id}, {new: true}, (err, user) => {
-        if (!user)
-            return res.json({
-                success: false,
-                message: "Sorry, token bad please try again!."
-            });
-            user.comparePassword(req.body.password, (err, isMatch) => {
-                        if (!isMatch)
-                            return res.json({success: false, message: "Password ko khop"});
-        user.password = req.body.newpassword;
-        user.save((err, doc) => {
-            if (err) return res.json({success: false, err});
-            return res.status(200).send({
-                success: true
-            });
-        });
-    });
-
-        
-    }
-   
-    
-    
-);
-});
 
 app.post("/api/client/addToCart", auth, (req, res) => {
     User.findOne({_id: req.user._id}, (err, doc) => {
