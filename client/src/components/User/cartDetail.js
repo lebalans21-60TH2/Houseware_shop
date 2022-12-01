@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import NumberFormat from "react-number-format";
+
 import { Link, withRouter } from "react-router-dom";
 import { message, Icon } from "antd";
 import { connect } from "react-redux";

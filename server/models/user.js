@@ -121,5 +121,10 @@ userSchema.statics.findByToken = function(token, cb) {
   });
 };
 
+// compare password
+userSchema.methods.comparePasswords = async function (enteredPassword) {
+  return bcrypt.compare(enteredPassword, this.password);
+};
+
 const User = mongoose.model("User", userSchema);
 module.exports = { User };

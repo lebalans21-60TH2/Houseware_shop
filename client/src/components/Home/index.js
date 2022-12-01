@@ -18,6 +18,7 @@ class Home extends Component {
   componentDidMount() {
     let cartItems = [];
     let user = this.props.user;
+    console.log(this.props.user);
 
     this.props.productsBySell();
     this.props.productsByArrival();
@@ -30,6 +31,7 @@ class Home extends Component {
       }
     }
   }
+
   addToCart0 = id => {
     const { user } = this.props;
     if (user.userData.isAuth) {
