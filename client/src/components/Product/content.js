@@ -7,11 +7,29 @@ class Content extends Component {
   showContent = () =>
     this.props.products.allProducts
       ? this.props.products.allProducts.map((item, i) => (
-          <div className="col-md-4 products-right-grids-bottom-grid"  style={{border:"1px solid #535", borderRadius:"10px", padding:"2px", minWidth:"14vmax", minHeight:"23vmax", backgroundColor:"#fff", marginRight:"12px"}} key={i}>
+          <div
+            className="col-md-4 products-right-grids-bottom-grid"
+            style={{
+              border: "1px solid #535",
+              borderRadius: "10px",
+              padding: "2px",
+              minWidth: "30%",
+              minHeight: "23vmax",
+              backgroundColor: "#fff",
+              marginRight: "12px",
+            }}
+            key={i}
+          >
             <div
               className="new-collections-grid1 products-right-grid1 animated wow slideInUp"
               data-wow-delay=".5s"
-              style={{minHeight:"23vmax", display:"flex",flexDirection:"column",alignContent:"space-between", justifyContent:"space-between"}}
+              style={{
+                minHeight: "23vmax",
+                display: "flex",
+                flexDirection: "column",
+                alignContent: "space-between",
+                justifyContent: "space-between",
+              }}
             >
               <div className="new-collections-grid1-image">
                 <a href="single.html" className="product-image">
@@ -72,7 +90,7 @@ class Content extends Component {
                   </div>
                 </div>
               </div>
-              <h4 style={{fontWeight:"550", fontSize:"1.3vmax"}}>
+              <h4 style={{ fontWeight: "550", fontSize: "1.3vmax" }}>
                 <a href="single.html">
                   {" "}
                   {item.name.length >= 15
@@ -83,11 +101,23 @@ class Content extends Component {
               {/* <p>{item.description.slice(0, 75)}...</p> */}
               <div className="simpleCart_shelfItem products-right-grid1-add-cart">
                 <p>
-                  <span className="item_price" style={{color:"red", marginTop:"15px", fontSize:"1.2vmax"}}>{`${currency.format(item.price, {code:"VND"})}`}</span>
+                  <span
+                    className="item_price"
+                    style={{
+                      color: "red",
+                      marginTop: "15px",
+                      fontSize: "1.2vmax",
+                    }}
+                  >{`${currency.format(item.price, { code: "VND" })}`}</span>
                   <a
                     className="item_add"
                     onClick={() => this.props.addToCart(item._id)}
-                    style={{textAlign:"center", paddingTop:"10px", borderRadius:"10px",bottom:"0"}}
+                    style={{
+                      textAlign: "center",
+                      paddingTop: "10px",
+                      borderRadius: "10px",
+                      bottom: "0",
+                    }}
                   >
                     Thêm vào giỏ{" "}
                   </a>
@@ -131,9 +161,9 @@ class Content extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products,
   };
 };
 export default connect(mapStateToProps)(Content);

@@ -12,8 +12,8 @@ class BestSelling extends Component {
             style={{
               border: "1px solid #535",
               borderRadius: "10px",
-              padding: "2px",
-              minWidth: "14vmax",
+             marginBottom:"12px",
+              minWidth: "23.333%",
               minHeight: "23vmax",
               backgroundColor: "#fff",
               marginRight: "12px",
@@ -39,9 +39,9 @@ class BestSelling extends Component {
                         : "images/change7.jpg"
                     }
                     alt=" "
-                    width={250}
+                    width={"100%"}
                     height={180}
-                    minWidth={250}
+                    minWidth={"100%"}
                     minHeight={180}
                     // className="img-responsive"
                   />
