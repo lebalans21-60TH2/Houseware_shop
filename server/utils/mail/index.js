@@ -11,17 +11,17 @@ const getEmailData = (to,name,token,template,actionData) =>{
     switch(template){
         case "welcome":
             data = {
-                from: "Motor Shopping <thanhtai16969@gmail.com>",
+                from: "Warehouse Store",
                 to,
-                subject: `Welcome to motor shopping ${name}`,
+                subject: `Chào mừng đến với Warehouse Store ${name}`,
                 html: welcome()
             }
         break;
         case "purchase":
             data = {
-                from: "Motor Shopping <thanhtai16969@gmail.com>",
+                from: "Warehouse Store",
                 to,
-                subject: `Thanks for shopping with us ${name}`,
+                subject: `Cảm ơn đã mua hàng tại Warehouse Store ${name}`,
                 html: purchase(actionData)
             }
         break;
@@ -29,7 +29,7 @@ const getEmailData = (to,name,token,template,actionData) =>{
             data = {
                 from: "Warehouse Store",
                 to,
-                subject: `Hey ${name}, reset your pass`,
+                subject: `Xin chào ${name}, Đặt lại mật khẩu của bạn`,
                 html: resetPass(actionData)
             }
         break;

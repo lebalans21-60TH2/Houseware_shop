@@ -8,10 +8,10 @@ const purchase = data => {
                 <h3>
                     ${item.brand} ${item.name}
                 </h3>
-                <p>Price paid: $ ${item.price}</p>
-                <p>Quantity: $ ${item.quantity}</p>
-                <p>Amount: $ ${parseInt(item.quantity * item.price, 10  )}</p>
-                <p>Purchase order: ${item.porder}</p>
+                <p>Giá: ${item.price} đ</p>
+                <p>Số lượng: ${item.quantity} đ</p>
+                <p>Tổng: ${parseInt(item.quantity * item.price, 10  )} đ</p>
+                <p>đơn đặt hàng: ${item.porder}</p>
              </div>
             `;
     });
