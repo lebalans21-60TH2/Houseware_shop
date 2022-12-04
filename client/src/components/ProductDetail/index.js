@@ -229,7 +229,7 @@ class ProductPage extends Component {
                         </div>
                       </div>
                     ) : (
-                      <div className="tag">
+                      <div className="tag"> 
                         <div>
                           <FontAwesomeIcon icon={faTimes} />
                         </div>

@@ -253,7 +253,7 @@ class Footer extends Component {
                         data-wow-delay=".5s"
                     >
                         <h2>
-                            <a href="index.html">
+                            <a href="/">
                                 HouseWare Store<span>shop anywhere</span>
                             </a>
                         </h2>

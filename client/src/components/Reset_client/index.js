@@ -11,6 +11,8 @@ class ReserUser extends Component {
   state = {
     formError: false,
     formSuccess: false,
+   
+    
     formdata: {
       email: {
         element: "input",
@@ -18,7 +20,7 @@ class ReserUser extends Component {
         config: {
           name: "email_input",
           type: "email",
-          placeholder: "Enter your email"
+          placeholder: "Nhập Email của bạn"
         },
         validation: {
           required: true,
@@ -50,6 +52,11 @@ class ReserUser extends Component {
           this.setState({
             formSuccess: true
           });
+        }else {
+          this.setState({
+            formError: true
+          });
+
         }
       });
     } else {
@@ -60,7 +67,7 @@ class ReserUser extends Component {
   };
 
   render() {
-    const { formdata, formError, formSuccess } = this.state;
+    const { formdata, formError, formSuccess} = this.state;
     return (
       <div>
         <div className="breadcrumbs">
@@ -70,22 +77,22 @@ class ReserUser extends Component {
               data-wow-delay=".5s"
             >
               <li>
-                <a href="index.html">
+                <a href="/">
                   <span
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
                   />
-                  Home
+                  Trang chủ
                 </a>
               </li>
-              <li className="active">Reset Password</li>
+              <li className="active">Quên mật khẩu</li>
             </ol>
           </div>
         </div>
         <div className="login">
           <div className="container">
             <h3 className="animated wow zoomIn" data-wow-delay=".5s">
-              Reset Password
+              Quên mật khẩu
             </h3>
 
             <div
@@ -99,15 +106,16 @@ class ReserUser extends Component {
                   change={element => this.updateForm(element)}
                 />
                 {formSuccess ? (
-                  <div className="form_success">Done, check your email</div>
+                  <div className="form_success">Xong, kiểm tra Email</div>
                 ) : null}
                 {formError ? (
-                  <div className="error_label">Please check your data</div>
+                  <div className="error_label">Kiểm tra lại Email đã nhập</div>
                 ) : null}
+               
                 <input
                   onClick={this.submitForm}
                   type="submit"
-                  value="Send email to reset password"
+                  value="Gửi mã xác nhận"
                 />
               </form>
             </div>

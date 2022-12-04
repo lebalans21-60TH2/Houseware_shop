@@ -47,8 +47,8 @@ const sendEmail = (to,name,token,type,actionData = null) => {
       
         service:"Gmail",
         auth:{
-            user: "army24062000@gmail.com",
-            pass: 'xrtjrbbuapcolcge'
+            user: "thanhdep8@gmail.com",
+            pass: 'lvszbtudeymateex'
         }
     });
 

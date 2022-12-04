@@ -27,19 +27,19 @@ class Header extends Component {
                 public: false
             },
             {
-                name: "Login",
+                name: "Đăng nhập",
                 linkTo: "/register_login",
                 className: "glyphicon glyphicon-log-in",
                 public: true
             },
             {
-                name: "Register",
+                name: "Đăng ký",
                 linkTo: "/register",
                 className: "glyphicon glyphicon-book",
                 public: true
             },
             {
-                name: "Logout",
+                name: "Đăng xuất",
                 linkTo: "/user/logout",
                 className: "glyphicon glyphicon-log-out",
                 public: false
@@ -63,7 +63,7 @@ class Header extends Component {
         });
     };
     defaultLink = (item, i) =>
-        item.name === "Logout" ? (
+        item.name === "Đăng xuất" ? (
             <li key={i} onClick={this.logOut}>
                 <i className={item.className} aria-hidden="true"/>
                 <a>{item.name}</a>
@@ -97,7 +97,7 @@ class Header extends Component {
                         list.push(item);
                     }
                 } else {
-                    if (item.name !== "Login" && item.name !== "Register") {
+                    if (item.name !== "Đăng nhập" && item.name !== "Đăng ký") {
                         list.push(item);
                     }
                 }
@@ -212,7 +212,7 @@ class Header extends Component {
                         >
                             <h1>
                                 <Link to="/">
-                                Houseware Store <span>Shop anywhere</span>
+                                Houseware Store <span style={{paddingTop:"16px"}}>Shop anywhere</span>
                                 </Link>
                             </h1>
                         </div>

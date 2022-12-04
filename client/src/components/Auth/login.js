@@ -112,7 +112,7 @@ class RegisterLogin extends Component {
                             data-wow-delay=".5s"
                         >
                             <li>
-                                <a href="index.html">
+                                <a href="/">
                                     <span className="glyphicon glyphicon-home" aria-hidden="true"/>
                                     Trang chủ
                                 </a>
@@ -143,7 +143,7 @@ class RegisterLogin extends Component {
                                     change={element => this.updateForm(element)} //element(id,event,blur) tu InputTemplate truyen ra
                                 />
                                 {formError ? (
-                                    <div className="error_label">Email hoạc mật khẩu không đúng!!!</div>
+                                    <div className="error_label">Email hoặc mật khẩu không đúng!!!</div>
                                 ) : null}
                                 <div className="forgot">
                                     <Link to='/reset_user'>Quên mật khẩu?</Link>
@@ -157,8 +157,8 @@ class RegisterLogin extends Component {
                             
                         </h4>
                         <p className="animated wow slideInUp" data-wow-delay=".5s">
-                            <a href="register.html">Đăng ký</a> || {" "}
-                            <a href="index.html">
+                            <a href="/register">Đăng ký</a> || {" "}
+                            <a href="/">
                                 Trang chủ
                                 <span
                                     className="glyphicon glyphicon-menu-right"

@@ -77,8 +77,8 @@ class ByArrival extends Component {
               <h4 style={{fontWeight:"550", fontSize:"1.3vmax"}}>
                 <a href="single.html">
                   {" "}
-                  {item.name.length >= 20
-                    ? `${item.name.slice(0, 20)}...`
+                  {item.name.length >= 15
+                    ? `${item.name.slice(0, 15)}...`
                     : item.name}
                 </a>
               </h4>

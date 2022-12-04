@@ -539,6 +539,12 @@ app.post("/api/client/update/:id", authAdmin, admin, (req, res, next) => {
 });
 app.post("/api/client/reset_user", (req, res) => {
     User.findOne({email: req.body.email}, (err, user) => {
+        if(!user){
+            return res.json({
+                success: false,
+                message: "Sorry, token bad please try again!."
+            });
+        }
         user.generateResetToken((err, user) => {
             if (err) return res.json({success: false, err});
             // sendEmail(user.email, user.name, null, "reset_password", user);
@@ -1025,4 +1031,17 @@ const port = process.env.PORT || 7000;
 
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
+});
+
+// Handling uncaught Exception
+process.on("uncaughtException",(err) =>{
+    console.log(`Error: ${err.message}`);
+    console.log(`Shutting down the server for Handling uncaught Exception`);
+})
+process.on("unhandledRejection", (err) =>{
+    console.log(`Shutting down server for ${err.message}`);
+    console.log(`Shutting down the server due to Unhandled promise rejection`);
+    server.close(() =>{
+        process.exit(1);
+    });
 });

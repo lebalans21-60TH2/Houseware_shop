@@ -63,7 +63,7 @@ class Product extends Component {
               data-wow-delay=".5s"
             >
               <li>
-                <a href="index.html">
+                <a href="/">
                   <span
                     className="glyphicon glyphicon-home"
                     aria-hidden="true"
