@@ -13,7 +13,8 @@ export class cartDetail extends Component {
     amount: 0,
     method: "",
     username: "",
-    id: ""
+    id: "",
+    
   };
   componentDidMount() {
     if (localStorage && localStorage.getItem("orderDetail")) {
@@ -102,6 +103,7 @@ export class cartDetail extends Component {
                     Phương thức thanh toán:
                   </abbr>{" "}
                   {this.state.method}
+                 
                 </address>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 text-right">

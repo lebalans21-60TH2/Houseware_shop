@@ -11,7 +11,7 @@ const paymentSchema = mongoose.Schema({
   },
   product: {
     type: Array,
-    default: []
+    default: [] 
   },
   paymentMethod: {
     type: String,
@@ -21,6 +21,11 @@ const paymentSchema = mongoose.Schema({
     type: String,
     maxlength: 100,
     default: "Pending"
+  },
+  arrivaltime:{
+    type: String,
+    default: "not update"
+    
   },
   date: { type: Date, default: new Date() },
   amount: {

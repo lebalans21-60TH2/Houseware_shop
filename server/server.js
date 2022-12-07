@@ -19,7 +19,7 @@ const stripe =require("stripe")(process.env.STRIPE_SECRET_TEST)
 
 mongoose.Promise = global.Promise;
 mongoose
-    .connect(process.env.DATABASE)
+    .connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true } )
     .then(() => console.log("MongoDB Connected!"))
     .catch(err => console.log(err));
 
@@ -112,6 +112,7 @@ app.post("/api/payment/update/:id", authAdmin, admin, (req, res, next) => {
         } else {
             // do your update here
             payment.status = req.body.status;
+            payment.arrivaltime = req.body.arrivaltime;
             payment
                 .save()
                 .then(payment => {

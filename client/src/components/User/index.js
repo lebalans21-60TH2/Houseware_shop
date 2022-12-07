@@ -17,6 +17,7 @@ export class UserDashboard extends Component {
     date: "",
     id: "",
     amount: 0,
+    arrivaltime:" "
   };
 
   componentDidMount() {
@@ -43,6 +44,7 @@ export class UserDashboard extends Component {
             date: item.date,
             id,
             amount: item.amount,
+            arrivaltime: item.arrivaltime
           });
         }
       });
@@ -90,7 +92,7 @@ export class UserDashboard extends Component {
 
   render() {
     const { user } = this.props;
-    const { data, product, userData, status, id, date, amount } = this.state;
+    const { data, product, userData, status, id, date, amount, arrivaltime} = this.state;
     const columns = ["Stt.", "Thời gian", "Giá", "Trạng thái", "Tùy chọn"];
     const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     const options = {
@@ -98,7 +100,7 @@ export class UserDashboard extends Component {
       responsive: "scroll",
       selectableRows: false,
     };
-    console.log(data);
+    console.log(this.state.arrivaltime);
     return (
       <UserLayout>
         <div>
@@ -239,6 +241,15 @@ export class UserDashboard extends Component {
                     </abbr>{" "}
                     {data[0]
                       ? data[0].method : null}
+                    <br /><>
+                    {this.state.arrivaltime !== "not update" ? (
+                      <>
+                    <abbr title="Phone" style={{ fontWeight: "bold" }}>
+                     Thời gian nhận hàng:
+                    </abbr> {this.state.arrivaltime}</> 
+                    ): (null)}
+                    </>
+                     
                   </address>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6 text-right">
