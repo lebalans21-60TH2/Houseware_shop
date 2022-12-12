@@ -300,7 +300,7 @@ class ProductPage extends Component {
                         Mô tả
                       </a>
                     </li>
-                    <li role="presentation">
+                    {/* <li role="presentation">
                       <a
                         href="#profile"
                         role="tab"
@@ -310,7 +310,7 @@ class ProductPage extends Component {
                       >
                         Đánh giá
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                   <div id="myTabContent" className="tab-content">
                     <div
