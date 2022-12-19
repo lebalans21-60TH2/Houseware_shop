@@ -663,12 +663,13 @@ app.post("/api/client/login", (req, res) => {
         if (!user)
             return res.json({
                 loginSuccess: false,
+                loginAdminSuccess: false,
                 message: "Auth failes, email not found"
             });
         // check password
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch)
-                return res.json({loginSuccess: false, message: "Password is wrong"});
+                return res.json({loginSuccess: false,loginAdminSuccess: false, message: "Password is wrong"});
             // generate Token
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
@@ -677,7 +678,8 @@ app.post("/api/client/login", (req, res) => {
                         .cookie("ad_auth", user.token)
                         .status(200)
                         .json({
-                            loginSuccess: true,
+                           
+                            loginAdminSuccess: true,
                             role: user.role
                         });
                 } else {

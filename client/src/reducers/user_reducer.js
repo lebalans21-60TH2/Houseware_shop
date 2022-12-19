@@ -4,7 +4,7 @@ export default function (state = {}, action) {
     switch (action.type) {
         case Types.LOGIN_USER:
             console.log(123213);
-            return {...state, loginSuccess: action.payload};
+            return {...state, loginSuccess: action.payload, loginAdminSuccess: action.payload };
         case Types.REGISTER_USER:
             return {...state, register: action.payload};
         case Types.LOGOUT_USER:

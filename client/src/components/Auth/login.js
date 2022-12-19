@@ -68,6 +68,23 @@ class RegisterLogin extends Component {
             modal.destroy();
         }, secondsToGo * 1000);
     };
+    countDownAdmin = () => {
+        let secondsToGo = 100;
+        const modal = Modal.success({
+            title: "CẢNH BÁO !!",
+            content: `Đây không phải hệ thống ADMIN, tài khoản ADMIN không khả dụng trên hệ thống mua sắm này!`
+        });
+        const timer = setInterval(() => {
+            secondsToGo -= 1;
+            modal.update({
+                content: `Đây không phải hệ thống ADMIN, tài khoản ADMIN không khả dụng trên hệ thống mua sắm này!!`
+            });
+        }, 1000);
+        setTimeout(() => {
+            clearInterval(timer);
+            modal.destroy();
+        }, secondsToGo * 1000);
+    };
     submitForm = e => {
         e.preventDefault();
         let dataToSubmit = generateData(this.state.formdata, "login");
@@ -80,7 +97,10 @@ class RegisterLogin extends Component {
                     setTimeout(() => {
                         this.props.history.push("");
                     }, 3000);
-                } else {
+                }else if (res.payload.loginAdminSuccess) {this.countDownAdmin();
+                    setTimeout(() => {
+                        // this.props.history.push("");
+                    }, 3000);} else {
                     this.setState({
                         formError: true
                     });
